@@ -14,18 +14,34 @@ from datetime import datetime
 class TenantList(db.Model):
     timestamp = db.DateTimeProperty(auto_now_add=True)
 
-class Tenant(db.Model):
-    todolist = db.ReferenceProperty(TenantList)
-    order = db.IntegerProperty()
-    content = db.StringProperty()
-    done = db.BooleanProperty()
+class Tenants(db.Model):
+    tenantlist = db.ReferenceProperty(TenantList)
+    
+#    order = db.IntegerProperty()
+#    content = db.StringProperty()
+#    done = db.BooleanProperty()
+    
+    firstName = db.StringProperty()
+    surname = db.StringProperty()
+    gender = db.StringProperty()
+    age = db.IntegerProperty()
+    phoneNumber = db.PhoneNumberProperty()
+    contactName = db.StringProperty()
+    contactPhoneNumber = db.PhoneNumberProperty()
+    email = db.EmailProperty()  
+    registerDate = db.DateProperty(auto_now_add = True)  
 
     def toDict(self):
         tenant = {
             'id': self.key().id(), 
-            'order': self.order,
-            'content': self.content,
-            'done': self.done
+            'firstName': self.firstName,
+            'surname': self.surname,
+            'gender': self.gender,
+            'age': self.age,
+            'phoneNumber': self.phoneNumber,
+            'email': self.email,
+            'registerDate': self.registerDate
+            
             }
         return tenant
 

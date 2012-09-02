@@ -1,0 +1,24 @@
+application: rentalhousemanagement3id
+version: 2
+runtime: python
+api_version: 1
+
+builtins:
+- datastore_admin: on
+
+handlers:
+
+- url: /css
+  static_dir: css
+
+- url: /img
+  static_dir: images
+
+- url: /js
+  static_dir: js
+  
+- url: /tpl
+  static_dir: templates
+
+- url: /.*
+  script: rentalManager.py
