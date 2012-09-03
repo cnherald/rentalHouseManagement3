@@ -98,6 +98,8 @@ class TenantHandler(webapp.RequestHandler):
             #template_values = {'tenants':tenants, 'roomNotAvailable':roomNotAvailable}                       
 
         self.response.out.write(template.render(path, template_values)) 
+        
+        
 application = webapp.WSGIApplication(
                      [('/', MainHandler),
                       ('/tenants',TenantHandler),
