@@ -4,14 +4,14 @@ require([
     'backbone',
     'views/header',
     'views/start',
-    'views/wine-details',
-    'views/wine-list',
+    'views/tenant-details',
+    'views/tenant-list',
     'utils/tpl',
-    'models/wine-model',
-    'models/wine-collection'
+    'models/tenants/tenant-model',
+    'models/tenants/tenant-collection'
 ],
 
-function($, _, Backbone, HeaderView, StartView, WineView, WineListView, tpl, Wine, WineCollection) {
+function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, tpl, Tenant, TenantCollection) {
 
     Backbone.View.prototype.close = function() {
         console.log('Closing view ' + this);
@@ -30,8 +30,8 @@ function($, _, Backbone, HeaderView, StartView, WineView, WineListView, tpl, Win
 
         routes: {
             "": "list",
-            "wines/new": "newWine",
-            "wines/:id": "wineDetails"
+            "tenants/new": "newTenant",
+            "tenants/:id": "tenantDetails"
         },
 
         list: function() {
@@ -40,19 +40,19 @@ function($, _, Backbone, HeaderView, StartView, WineView, WineListView, tpl, Win
             });
         },
 
-        wineDetails: function(id) {
+        tenantDetails: function(id) {
             this.before(function() {
-                var wine = this.wineList.get(id);
-                this.showView('#content', new WineView({
-                    model: wine
+                var tenant = this.tenantList.get(id);
+                this.showView('#content', new TenantView({
+                    model: tenant
                 }));
             });
         },
 
-        newWine: function() {
+        newTenant: function() {
             this.before(function() {
-                this.showView('#content', new WineView({
-                    model: new Wine()
+                this.showView('#content', new TenantView({
+                    model: new Tenant()
                 }));
             });
         },
@@ -67,17 +67,17 @@ function($, _, Backbone, HeaderView, StartView, WineView, WineListView, tpl, Win
         },
 
         before: function(callback) {
-            if (this.wineList) {
+            if (this.tenantList) {
                 if (callback) callback.call(this);
             } else {
-                this.wineList = new WineCollection();
+                this.tenantList = new TenantCollection();
                 var self = this;
-                this.wineList.fetch({
+                this.tenantList.fetch({
                     success: function() {
-                        var winelist = new WineListView({
-                            model: self.wineList
+                        var tenantlist = new TenantListView({
+                            model: self.tenantList
                         }).render();
-                        $('#sidebar').html(winelist);
+                        $('#sidebar').html(tenantlist);
                         if (callback) callback.call(self);
                     }
                 });
@@ -86,7 +86,7 @@ function($, _, Backbone, HeaderView, StartView, WineView, WineListView, tpl, Win
 
     });
 
-    tpl.loadTemplates(['header', 'wine-details', 'wine-list-item', 'start'], function() {
+    tpl.loadTemplates(['header', 'tenant-details', 'tenant-list-item', 'start'], function() {
         window.app = new AppRouter();
         Backbone.history.start();
     });
