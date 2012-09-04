@@ -102,7 +102,7 @@ class TenantHandler(webapp.RequestHandler):
         
 application = webapp.WSGIApplication(
                      [('/', MainHandler),
-                      ('/tenants',TenantHandler),
+#                      ('/tenants',TenantHandler),
                       ('/tenants\/?([0-9]*)', RESTfulHandler)],
                       debug=True)
 
