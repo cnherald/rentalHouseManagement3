@@ -35,12 +35,12 @@ function($, _, Backbone, tpl) {
 
         saveTenant: function() {
             this.model.set({
-                name: $('#name').val(),
-                grapes: $('#grapes').val(),
-                country: $('#country').val(),
-                region: $('#region').val(),
-                year: $('#year').val(),
-                description: $('#description').val()
+                FirstName: $('#firstName').val(),
+                Surname: $('#surname').val(),
+                Gender: $('#gender').val(),
+                Age: $('#age').val(),
+                PhoneNumber: $('#phoneNumber').val(),
+                Email: $('#email').val()
             });
             if (this.model.isNew()) {
                 var self = this;
