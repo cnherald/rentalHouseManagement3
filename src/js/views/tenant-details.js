@@ -47,7 +47,7 @@ function($, _, Backbone, tpl) {
                 app.tenantList.create(this.model, {
                     success: function() {
                         //app.navigate('tenants/' + self.model.id, false);
-						app.navigate('tenants/' + self.model.Firstname, false);
+						app.navigate('tenants/' + self.model.FirstName, false);
                     }
                 });
             } else {
