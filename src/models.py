@@ -44,4 +44,20 @@ class Tenants(db.Model):
             
             }
         return tenant
+    
+    def registerTenant(self,data,key):
+        tenantList = db.get(key)
+        tenant = Tenants(key_name = data['firstName'] + data['surname'] + data['registerDate'])         
+        #tenant = Tenant(key_name = self.request.get('firstName')+'_' + self.request.get('surname'))      
+        tenant.tenantList = tenantList.key()
+        tenant.firstName = data['firstName']
+        tenant.surname = data['surname']
+        tenant.gender = data['gender']
+        tenant.age = int(data['age'])
+        tenant.phoneNumber = data['phoneNumber']
+        tenant.email = data['email']
+        registerDate = datetime.strptime(data['registerDate'],"%Y-%m-%d")
+        tenant.registerDate = registerDate.date()    
+        tenant.put()
+#        return tenant
 

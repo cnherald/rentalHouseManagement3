@@ -35,12 +35,13 @@ function($, _, Backbone, tpl) {
 
         saveTenant: function() {
             this.model.set({
-                FirstName: $('#firstName').val(),
-                Surname: $('#surname').val(),
-                Gender: $('#gender').val(),
-                Age: $('#age').val(),
-                PhoneNumber: $('#phoneNumber').val(),
-                Email: $('#email').val()
+                firstName: $('#firstName').val(),
+                surname: $('#surname').val(),
+                gender: $('#gender').val(),
+                age: $('#age').val(),
+                phoneNumber: $('#phoneNumber').val(),
+                email: $('#email').val(),
+				registerDate: $('#registerDate').val()
             });
             if (this.model.isNew()) {
                 var self = this;
