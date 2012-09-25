@@ -7,12 +7,13 @@ function($, _, Backbone) {
         urlRoot: "tenants/",
         defaults: {
             "id": null,
-            "FirstName": "",
-            "Surname": "",
-            "Gender": "",
-            "Age": " ",
-            "PhoneNumber": "",
-            "Email": ""
+            "firstName": "",
+            "surname": "",
+            "gender": "",
+            "age": " ",
+            "phoneNumber": "",
+            "email": "",
+			"registerDate": ""
         }
     });
 
