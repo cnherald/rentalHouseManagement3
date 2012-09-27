@@ -1,3 +1,4 @@
 *.py~
 *.pyc
-*.pydevproject
+.pydevproject
+.project
