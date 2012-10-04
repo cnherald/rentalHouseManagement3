@@ -47,6 +47,7 @@ function($, _, Backbone, tpl) {
                 var self = this;
                 app.tenantList.create(this.model, {
                     success: function() {
+						alert("you have registered a new tenant!!!");
                         app.navigate('tenants/' + self.model.id, false);
 						
 						
