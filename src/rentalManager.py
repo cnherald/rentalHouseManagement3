@@ -42,7 +42,7 @@ class RESTfulHandler(webapp.RequestHandler):
         tenantList = db.get(key)
         tenants = []
         query = Tenants.all()
-        query.filter("tenantList =", tenantList.key())
+        #query.filter("tenantList =", tenantList.key())
         for tenant in query:
             tenants.append(tenant.toDict())
         tenants = simplejson.dumps(tenants)
