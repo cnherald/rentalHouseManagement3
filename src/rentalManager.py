@@ -41,7 +41,8 @@ class RESTfulHandler(webapp.RequestHandler):
         key = self.request.cookies['tenants']
         tenantList = db.get(key)
         tenants = []
-        query = Tenants.all()
+        #query = Tenants.all()
+        query = db.GqlQuery("SELECT * FROM Tenants")
         #query.filter("tenantList =", tenantList.key())
         for tenant in query:
             tenants.append(tenant.toDict())
