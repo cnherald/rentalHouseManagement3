@@ -40,8 +40,8 @@ class Tenants(db.Model):
             'age': self.age,
             'phoneNumber': self.phoneNumber,
             'email': self.email,
-            'registerDate': self.registerDate
-            
+            #'registerDate': self.registerDate
+            'registerDate': self.registerDate.isoformat()
             }
         return tenant
     
