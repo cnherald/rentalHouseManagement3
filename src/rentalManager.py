@@ -45,7 +45,8 @@ class RESTfulHandler(webapp.RequestHandler):
         query = db.GqlQuery("SELECT * FROM Tenants")
         #query.filter("tenantList =", tenantList.key())
         for tenant in query:
-            tenants.append(tenant.toDict())
+           # tenants.append(tenant.toDict())
+            tenants.append(tenant.to_dict())
         tenants = simplejson.dumps(tenants)
         self.response.out.write(tenants)
     

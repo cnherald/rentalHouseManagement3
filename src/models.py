@@ -10,7 +10,9 @@ from datetime import date
 from datetime import timedelta
 import math
 from datetime import datetime
-   
+#import datetime
+import time
+
 class TenantList(db.Model):
     timestamp = db.DateTimeProperty(auto_now_add=True)
 
@@ -30,7 +32,7 @@ class Tenants(db.Model):
     contactPhoneNumber = db.PhoneNumberProperty()
     email = db.EmailProperty()  
     registerDate = db.DateProperty(auto_now_add = True)  
-
+    
     def toDict(self):
         tenant = {
             'id': self.key().id(), 
@@ -43,6 +45,29 @@ class Tenants(db.Model):
             #'registerDate': self.registerDate
             'registerDate': self.registerDate.isoformat()
             }
+        return tenant
+    
+    def to_dict(self):
+        # Define 'simple' types using a tuple
+        SIMPLE_TYPES = (int, long, float, bool, dict, basestring, list)
+        tenant = {}
+    
+        for key, prop in self.properties().iteritems():
+            value = getattr(self, key)
+    
+            if value is None or isinstance(value, SIMPLE_TYPES):
+                tenant[key] = value
+            elif isinstance(value, datetime.date):
+                dateString = value.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+                tenant[key] = dateString
+            elif isinstance(value, db.GeoPt):
+                tenant[key] = {'lat': value.lat, 'lon': value.lon}
+            elif isinstance(value, db.Model):
+                # Recurse
+                tenant[key] = self.to_dict
+            else:
+                raise ValueError('cannot encode ' + repr(prop))
+
         return tenant
     
     def registerTenant(self,data,key):
