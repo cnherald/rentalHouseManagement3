@@ -35,6 +35,7 @@ function($, _, Backbone, tpl) {
 
         saveTenant: function() {
             this.model.set({
+				id: $('#tenantId').val(),
                 firstName: $('#firstName').val(),
                 surname: $('#surname').val(),
                 gender: $('#gender').val(),
