@@ -45,7 +45,8 @@ class RESTfulHandler(webapp.RequestHandler):
         query = db.GqlQuery("SELECT * FROM Tenants")
         #query.filter("tenantList =", tenantList.key())
         for tenant in query:
-            tenants.append(tenant.toDict())
+           # tenants.append(tenant.toDict())
+            tenants.append(tenant.to_dict())
         tenants = simplejson.dumps(tenants)
         self.response.out.write(tenants)
     
@@ -117,7 +118,7 @@ class TenantHandler(webapp.RequestHandler):
         
 application = webapp.WSGIApplication(
                      [('/', MainHandler),
-#                      ('/tenants',TenantHandler),
+                    #('/tenants',TenantHandler),
                       ('/tenants\/?([0-9]*)', RESTfulHandler)],
                       debug=True)
 

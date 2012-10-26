@@ -6,11 +6,13 @@ Created on Jun 15, 2012
 
 from google.appengine.ext import db
 from django.http import HttpResponse
-from datetime import date
+#from datetime import date
 from datetime import timedelta
 import math
-from datetime import datetime
-   
+#from datetime import datetime
+import datetime
+import time
+
 class TenantList(db.Model):
     timestamp = db.DateTimeProperty(auto_now_add=True)
 
@@ -30,7 +32,7 @@ class Tenants(db.Model):
     contactPhoneNumber = db.PhoneNumberProperty()
     email = db.EmailProperty()  
     registerDate = db.DateProperty(auto_now_add = True)  
-
+    
     def toDict(self):
         tenant = {
             'id': self.key().id(), 
@@ -45,6 +47,31 @@ class Tenants(db.Model):
             }
         return tenant
     
+    def to_dict(self):
+        # Define 'simple' types using a tuple
+        SIMPLE_TYPES = (int, long, float, bool, dict, basestring, list)
+        tenant = {}
+    
+        for key, prop in self.properties().iteritems():
+            value = getattr(self, key)
+    
+            if value is None or isinstance(value, SIMPLE_TYPES):
+                tenant[key] = value
+            elif isinstance(value, datetime.date):
+            #elif isinstance(value, datetime):
+                dateString = value.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+                #dateString = value
+                tenant[key] = dateString
+            elif isinstance(value, db.GeoPt):
+                tenant[key] = {'lat': value.lat, 'lon': value.lon}
+            #elif isinstance(value, db.Model):
+                # Recurse
+                #tenant[key] = self.to_dict
+            #else:
+                #raise ValueError('cannot encode ' + repr(prop))
+
+        return tenant
+    
     def registerTenant(self,data,key):
         tenantList = db.get(key)
         tenant = Tenants(key_name = data['firstName'] + data['surname'] + data['registerDate'])         
@@ -56,7 +83,7 @@ class Tenants(db.Model):
         tenant.age = int(data['age'])
         tenant.phoneNumber = data['phoneNumber']
         tenant.email = data['email']
-        registerDate = datetime.strptime(data['registerDate'],"%Y-%m-%d")
+        registerDate = datetime.datetime.strptime(data['registerDate'],"%Y-%m-%d")
         tenant.registerDate = registerDate.date()    
         tenant.put()
 #        return tenant

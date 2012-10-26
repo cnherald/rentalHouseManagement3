@@ -48,9 +48,8 @@ function($, _, Backbone, tpl) {
                 app.tenantList.create(this.model, {
                     success: function() {
 						alert("you have registered a new tenant!!!");
-                        app.navigate('tenants/' + self.model.id, false);
-						//app.navigate('tenants/' + self.model.firstName, false);
-						
+                        //app.navigate('tenants/' + self.model.id, false);
+						app.navigate('tenants/' + self.model.id, true);
                     }
                 });
             } else {
