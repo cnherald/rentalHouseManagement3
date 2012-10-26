@@ -29,13 +29,19 @@ function($, _, Backbone, tpl) {
     var TenantListItemView = Backbone.View.extend({
 
         tagName: "li",
-
+		events:{
+			"click #tenantFirstName": "alertMsg"
+		},
         initialize: function() {
             this.template = _.template(tpl.get('tenant-list-item'));
             this.model.bind("change", this.render, this);
             this.model.bind("destroy", this.close, this);
         },
-
+		alertMsg: function(){
+			alert("test!!!!");
+			app.navigate('tenants/' + this.model.id, true); 
+			//return false;
+		},
         render: function(eventName) {
             this.$el.html(this.template(this.model.toJSON()));
             return this.el;
