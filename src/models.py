@@ -22,7 +22,7 @@ class Tenants(db.Model):
 #    order = db.IntegerProperty()
 #    content = db.StringProperty()
 #    done = db.BooleanProperty()
-    
+    id = db.IntegerProperty()
     firstName = db.StringProperty()
     surname = db.StringProperty()
     gender = db.StringProperty()
