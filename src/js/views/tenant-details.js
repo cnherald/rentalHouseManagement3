@@ -35,7 +35,7 @@ function($, _, Backbone, tpl) {
 
         saveTenant: function() {
             this.model.set({
-				id: $('#tenantId').val(),
+				//id: $('#tenantId').val(),
                 firstName: $('#firstName').val(),
                 surname: $('#surname').val(),
                 gender: $('#gender').val(),
@@ -48,7 +48,7 @@ function($, _, Backbone, tpl) {
                 var self = this;
                 app.tenantList.create(this.model, {
                     success: function() {
-						alert("you have registered a new tenant!!!");
+						alert("you have registered a new tenant!!!  " + self.model.toJSON());						
                         //app.navigate('tenants/' + self.model.id, false);
 						app.navigate('tenants/' + self.model.id, true);
                     }
