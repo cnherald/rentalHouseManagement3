@@ -48,9 +48,9 @@ function($, _, Backbone, tpl) {
                 var self = this;
                 app.tenantList.create(this.model, {
                     success: function() {
-						alert("you have registered a new tenant!!!  " + self.model.toJSON());						
-                        //app.navigate('tenants/' + self.model.id, false);
-						app.navigate('tenants/' + self.model.id, true);
+						//alert("you have registered a new tenant!!!  " + self.model.toJSON());						
+                        app.navigate('tenants/' + self.model.id, false);
+						//app.navigate('tenants/' + self.model.id, true);
                     }
                 });
             } else {

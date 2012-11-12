@@ -74,7 +74,8 @@ class Tenants(db.Model):
     
     def registerTenant(self,data,key):
         tenantList = db.get(key)
-        tenant = Tenants(key_name = data['firstName'] + data['surname'] + data['registerDate'])         
+        #tenant = Tenants(key_name = data['firstName'] + data['surname'] + data['registerDate'])
+        tenant = Tenants()         
         #tenant = Tenant(key_name = self.request.get('firstName')+'_' + self.request.get('surname'))      
         tenant.tenantlist = tenantList.key()
         tenant.firstName = data['firstName']
@@ -86,5 +87,7 @@ class Tenants(db.Model):
         registerDate = datetime.datetime.strptime(data['registerDate'],"%Y-%m-%d")
         tenant.registerDate = registerDate.date()    
         tenant.put()
+        #return tenant.to_dict()
+        return tenant.toDict()
 #        return tenant
 
