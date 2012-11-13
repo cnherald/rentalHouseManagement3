@@ -39,7 +39,7 @@ function($, _, Backbone, tpl) {
         },
 		alertMsg: function(){
 			alert("test!!!!");
-			app.navigate('tenants/' + this.model.id, true); 
+			//app.navigate('tenants/' + this.model.id, true); 
 			//return false;
 		},
         render: function(eventName) {

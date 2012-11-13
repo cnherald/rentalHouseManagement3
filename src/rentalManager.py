@@ -69,12 +69,14 @@ class RESTfulHandler(webapp.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json'
         jsonString = self.request.body          
         inputData = simplejson.loads(jsonString) #Decoding JSON 
-        Tenants().registerTenant(inputData,key) 
-        #tenant = Tenant().registerTenant(data)
-        #tenant.createRegisterActivityRecord()
-        tenantRegisterResponse = {'tenantRegisterMsg':'Congratulations, you have registered a new tenant successfully!'}
-        jsonResponse = simplejson.dumps(tenantRegisterResponse)
-        return self.response.out.write(jsonResponse)
+#        Tenants().registerTenant(inputData,key) 
+#        #tenant = Tenant().registerTenant(data)
+#        #tenant.createRegisterActivityRecord()
+#        tenantRegisterResponse = {'tenantRegisterMsg':'Congratulations, you have registered a new tenant successfully!'}
+#        jsonResponse = simplejson.dumps(tenantRegisterResponse)
+#        return self.response.out.write(jsonResponse)
+        tenant = simplejson.dumps(Tenants().registerTenant(inputData,key))
+        self.response.out.write(tenant)
     
     def put(self, id):
         key = self.request.cookies['tenants']
