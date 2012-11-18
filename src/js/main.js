@@ -41,6 +41,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, tpl,
         },
 
         tenantDetails: function(id) {
+            alert("test------id= " + id);
             this.before(function() {
                 var tenant = this.tenantList.get(id);
                 this.showView('#content', new TenantView({

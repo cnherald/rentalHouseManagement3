@@ -26,6 +26,7 @@ function($, _, Backbone, tpl) {
 
         change: function(event) {
             var target = event.target;
+            alert("there is something changed!!");
             console.log('changing ' + target.id + ' from: ' + target.defaultValue + ' to: ' + target.value);
             // You could change your model on the spot, like this:
             // var change = {};
@@ -48,7 +49,7 @@ function($, _, Backbone, tpl) {
                 var self = this;
                 app.tenantList.create(this.model, {
                     success: function() {
-						//alert("you have registered a new tenant!!!  " + self.model.toJSON());						
+						alert("you have registered a new tenant!!!  ");						
                         app.navigate('tenants/' + self.model.id, false);
 						//app.navigate('tenants/' + self.model.id, true);
                     }
