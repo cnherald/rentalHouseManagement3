@@ -82,12 +82,14 @@ class RESTfulHandler(webapp.RequestHandler):
         key = self.request.cookies['tenants']
         tenantList = db.get(key)
         tenant = Tenants.get_by_id(int(id))
-        if tenant.tenantList.key() == tenantList.key():
-            tmp = simplejson.loads(self.request.body)
-            tenant.content = tmp['content']
-            tenant.done    = tmp['done']
-            tenant.put()
-            tenant = simplejson.dumps(tenant.toDict())
+        if tenant.tenantlist.key() == tenantList.key():           
+            inputData = simplejson.loads(self.request.body)
+#            tenant.content = inputData['content']
+#            tenant.done    = inputData['done']
+#            tenant.put()            
+#            tenant = simplejson.dumps(tenant.toDict())
+            temp = tenant.updateTenant(inputData)
+            tenant = simplejson.dumps(temp)
             self.response.out.write(tenant)
         else:
             self.error(403)
