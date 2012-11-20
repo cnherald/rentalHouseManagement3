@@ -80,9 +80,9 @@ class RESTfulHandler(webapp.RequestHandler):
     
     def put(self, id):
         key = self.request.cookies['tenants']
-        tenantList = db.get(key)
+        tenantlist = db.get(key)
         tenant = Tenants.get_by_id(int(id))
-        if tenant.tenantlist.key() == tenantList.key():           
+        if tenant.tenantlist.key() == tenantlist.key():           
             inputData = simplejson.loads(self.request.body)
 #            tenant.content = inputData['content']
 #            tenant.done    = inputData['done']
@@ -96,10 +96,10 @@ class RESTfulHandler(webapp.RequestHandler):
     
     def delete(self, id):
         key = self.request.cookies['tenants']
-        tenantList = db.get(key)
+        tenantlist = db.get(key)
         tenant = Tenants.get_by_id(int(id))
-        if tenant.tenantList.key() == tenantList.key():
-            tmp = tenant.toDict()
+        if tenant.tenantlist.key() == tenantlist.key():
+            #tmp = tenant.toDict()
             tenant.delete()
         else:
             self.error(403)
