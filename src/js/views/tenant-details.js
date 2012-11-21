@@ -26,7 +26,7 @@ function($, _, Backbone, tpl) {
 
         change: function(event) {
             var target = event.target;
-            alert("there is something changed!!");
+            //alert("there is something changed!!");
             console.log('changing ' + target.id + ' from: ' + target.defaultValue + ' to: ' + target.value);
             // You could change your model on the spot, like this:
             // var change = {};
@@ -35,8 +35,7 @@ function($, _, Backbone, tpl) {
         },
 
         saveTenant: function() {
-            this.model.set({
-				//id: $('#tenantId').val(),
+            this.model.set({				
                 firstName: $('#firstName').val(),
                 surname: $('#surname').val(),
                 gender: $('#gender').val(),
@@ -47,7 +46,7 @@ function($, _, Backbone, tpl) {
             });
             if (this.model.isNew()) {
                 var self = this;
-                app.tenantList.create(this.model, {
+                app.tenantList.create(this.model, { wait: true,
                     success: function() {
 						alert("you have registered a new tenant!!!  ");						
                         app.navigate('tenants/' + self.model.id, false);
