@@ -45,8 +45,8 @@ class RESTfulHandler(webapp.RequestHandler):
         query = db.GqlQuery("SELECT * FROM Tenants")
         #query.filter("tenantList =", tenantList.key())
         for tenant in query:
-           # tenants.append(tenant.toDict())
-            tenants.append(tenant.to_dict())
+            tenants.append(tenant.toDict())
+           # tenants.append(tenant.to_dict())
         tenants = simplejson.dumps(tenants)
         self.response.out.write(tenants)
     
@@ -80,24 +80,26 @@ class RESTfulHandler(webapp.RequestHandler):
     
     def put(self, id):
         key = self.request.cookies['tenants']
-        tenantList = db.get(key)
+        tenantlist = db.get(key)
         tenant = Tenants.get_by_id(int(id))
-        if tenant.tenantList.key() == tenantList.key():
-            tmp = simplejson.loads(self.request.body)
-            tenant.content = tmp['content']
-            tenant.done    = tmp['done']
-            tenant.put()
-            tenant = simplejson.dumps(tenant.toDict())
+        if tenant.tenantlist.key() == tenantlist.key():           
+            inputData = simplejson.loads(self.request.body)
+#            tenant.content = inputData['content']
+#            tenant.done    = inputData['done']
+#            tenant.put()            
+#            tenant = simplejson.dumps(tenant.toDict())
+            temp = tenant.updateTenant(inputData)
+            tenant = simplejson.dumps(temp)
             self.response.out.write(tenant)
         else:
             self.error(403)
     
     def delete(self, id):
         key = self.request.cookies['tenants']
-        tenantList = db.get(key)
+        tenantlist = db.get(key)
         tenant = Tenants.get_by_id(int(id))
-        if tenant.tenantList.key() == tenantList.key():
-            tmp = tenant.toDict()
+        if tenant.tenantlist.key() == tenantlist.key():
+            #tmp = tenant.toDict()
             tenant.delete()
         else:
             self.error(403)

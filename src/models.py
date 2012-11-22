@@ -91,3 +91,16 @@ class Tenants(db.Model):
         return tenant.toDict()
 #        return tenant
 
+    def updateTenant(self,data):
+        #tenant.tenantlist = tenantList.key()
+        self.firstName = data['firstName']
+        self.surname = data['surname']
+        self.gender = data['gender']
+        self.age = int(data['age'])
+        self.phoneNumber = data['phoneNumber']
+        self.email = data['email']
+        registerDate = datetime.datetime.strptime(data['registerDate'],"%Y-%m-%d")
+        self.registerDate = registerDate.date()    
+        self.put()
+        #return tenant.to_dict()
+        return self.toDict()

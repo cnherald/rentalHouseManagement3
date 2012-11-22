@@ -38,7 +38,7 @@ function($, _, Backbone, tpl) {
             this.model.bind("destroy", this.close, this);
         },
 		alertMsg: function(){
-			alert("test!!!!");
+			//alert("test!!!!");
 			//app.navigate('tenants/' + this.model.id, true); 
 			//return false;
 		},

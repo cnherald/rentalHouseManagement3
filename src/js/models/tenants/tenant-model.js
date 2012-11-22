@@ -5,7 +5,7 @@ function($, _, Backbone) {
 
     var Tenant = Backbone.Model.extend({
         urlRoot: "tenants/",
-		idAttribute: "_id",
+		//idAttribute: "_id",
         defaults: {
             "id": null,
             "firstName": "",
