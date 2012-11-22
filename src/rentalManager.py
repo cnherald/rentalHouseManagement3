@@ -25,25 +25,25 @@ import os, Cookie
 
 class MainHandler(webapp.RequestHandler):
     def get(self):
-        if self.request.cookies.get('tenants', None) == None:
+        if self.request.cookies.get('tenantlist', None) == None:
             tenantList = TenantList()
             tenantList.put()
             cookie = Cookie.SimpleCookie()
-            cookie['tenants'] = tenantList.key().__str__()
-            cookie['tenants']['expires'] = datetime(2014, 1, 1).strftime('%a, %d %b %Y %H:%M:%S')
-            cookie['tenants']['path'] = '/'
-            self.response.headers.add_header('Set-Cookie', cookie['tenants'].OutputString())
+            cookie['tenantlist'] = tenantList.key().__str__()
+            cookie['tenantlist']['expires'] = datetime(2014, 1, 1).strftime('%a, %d %b %Y %H:%M:%S')
+            cookie['tenantlist']['path'] = '/'
+            self.response.headers.add_header('Set-Cookie', cookie['tenantlist'].OutputString())
         path = os.path.join(os.path.dirname(__file__), 'index.html')
         self.response.out.write(template.render(path, None))
 
 class RESTfulHandler(webapp.RequestHandler):
     def get(self, id):
-        key = self.request.cookies['tenants']
-        tenantList = db.get(key)
+        key = self.request.cookies['tenantlist']
+        tenantlist = db.get(key)
         tenants = []
-        #query = Tenants.all()
-        query = db.GqlQuery("SELECT * FROM Tenants")
-        #query.filter("tenantList =", tenantList.key())
+        query = Tenants.all()
+        #query = db.GqlQuery("SELECT * FROM Tenants")
+        query.filter("tenantlist =", tenantlist.key())
         for tenant in query:
             tenants.append(tenant.toDict())
            # tenants.append(tenant.to_dict())
@@ -51,7 +51,7 @@ class RESTfulHandler(webapp.RequestHandler):
         self.response.out.write(tenants)
     
     def post(self, id):
-        key = self.request.cookies['tenants']
+        key = self.request.cookies['tenantlist']
 #        tenantList = db.get(key)
 #        tenant = simplejson.loads(self.request.body)
 #        tenant = Tenants(tenantList = tenantList.key(),
@@ -79,7 +79,7 @@ class RESTfulHandler(webapp.RequestHandler):
         self.response.out.write(tenant)
     
     def put(self, id):
-        key = self.request.cookies['tenants']
+        key = self.request.cookies['tenantlist']
         tenantlist = db.get(key)
         tenant = Tenants.get_by_id(int(id))
         if tenant.tenantlist.key() == tenantlist.key():           
@@ -95,7 +95,7 @@ class RESTfulHandler(webapp.RequestHandler):
             self.error(403)
     
     def delete(self, id):
-        key = self.request.cookies['tenants']
+        key = self.request.cookies['tenantlist']
         tenantlist = db.get(key)
         tenant = Tenants.get_by_id(int(id))
         if tenant.tenantlist.key() == tenantlist.key():
