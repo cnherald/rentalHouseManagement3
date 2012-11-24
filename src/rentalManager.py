@@ -93,7 +93,8 @@ class RESTfulHandler(webapp.RequestHandler):
             self.response.out.write(tenant)
         else:
             self.error(403)
-    
+        #self.response.out.write()
+        
     def delete(self, id):
         key = self.request.cookies['tenantlist']
         tenantlist = db.get(key)
@@ -103,7 +104,8 @@ class RESTfulHandler(webapp.RequestHandler):
             tenant.delete()
         else:
             self.error(403)
-    
+        #self.response.out.write()
+        
 class TenantHandler(webapp.RequestHandler):
     roomNotAvailable = False
     def get(self):

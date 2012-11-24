@@ -50,11 +50,17 @@ function($, _, Backbone, tpl) {
                     success: function() {
 						alert("you have registered a new tenant!!!  ");						
                         app.navigate('tenants/' + self.model.id, false);
-						//app.navigate('tenants/' + self.model.id, true);
+						
                     }
                 });
             } else {
-                this.model.save();
+                this.model.save(this.model, { wait: true,
+                    success: function() {
+                        alert("you have Changed the tenant!!!  ");                     
+                        app.navigate('tenants/' + self.model.id, false);
+                        
+                    }
+                });
             }
 
             return false;
