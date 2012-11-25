@@ -20,7 +20,7 @@ class Tenants(db.Model):
     tenantlist = db.ReferenceProperty(TenantList)
     
 #    order = db.IntegerProperty()
-#    content = db.StringProperty()
+    picture = db.BlobProperty()
 #    done = db.BooleanProperty()
     #id = db.IntegerProperty()
     firstName = db.StringProperty()
