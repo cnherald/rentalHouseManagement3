@@ -43,7 +43,8 @@ class Tenants(db.Model):
             'phoneNumber': self.phoneNumber,
             'email': self.email,
             #'registerDate': self.registerDate
-            'registerDate': self.registerDate.isoformat()
+            'registerDate': self.registerDate.isoformat(),
+            'picture': self.picture
             }
         return tenant
     
@@ -86,6 +87,7 @@ class Tenants(db.Model):
         tenant.email = data['email']
         registerDate = datetime.datetime.strptime(data['registerDate'],"%Y-%m-%d")
         tenant.registerDate = registerDate.date()    
+        tenant.picture = data['picture']
         tenant.put()
         #return tenant.to_dict()
         return tenant.toDict()
