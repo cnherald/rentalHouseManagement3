@@ -20,8 +20,8 @@ class Tenants(db.Model):
     tenantlist = db.ReferenceProperty(TenantList)
     
 #    order = db.IntegerProperty()
-    #picture = db.BlobProperty()
-    picture = db.StringProperty()
+    picture = db.BlobProperty()
+    #picture = db.StringProperty()
 #    done = db.BooleanProperty()
     #id = db.IntegerProperty()
     firstName = db.StringProperty()
@@ -74,7 +74,7 @@ class Tenants(db.Model):
 
         return tenant
     
-    def registerTenant(self,data,key):
+    def registerTenant(self,data,key,pic):
         tenantList = db.get(key)
         #tenant = Tenants(key_name = data['firstName'] + data['surname'] + data['registerDate'])
         tenant = Tenants()         
@@ -88,7 +88,8 @@ class Tenants(db.Model):
         tenant.email = data['email']
         registerDate = datetime.datetime.strptime(data['registerDate'],"%Y-%m-%d")
         tenant.registerDate = registerDate.date()    
-        tenant.picture = data['picture']
+        #tenant.picture = data['picture']
+        tenant.picture = db.Blob(pic)
         tenant.put()
         #return tenant.to_dict()
         return tenant.toDict()
