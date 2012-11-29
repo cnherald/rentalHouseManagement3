@@ -45,7 +45,7 @@ class Tenants(db.Model):
             'email': self.email,
             #'registerDate': self.registerDate
             'registerDate': self.registerDate.isoformat(),
-            'picture': self.picture
+            #'picture': self.picture
             }
         return tenant
     
@@ -74,7 +74,7 @@ class Tenants(db.Model):
 
         return tenant
     
-    def registerTenant(self,data,key,pic):
+    def registerTenant(self,data,key):
         tenantList = db.get(key)
         #tenant = Tenants(key_name = data['firstName'] + data['surname'] + data['registerDate'])
         tenant = Tenants()         
@@ -89,7 +89,7 @@ class Tenants(db.Model):
         registerDate = datetime.datetime.strptime(data['registerDate'],"%Y-%m-%d")
         tenant.registerDate = registerDate.date()    
         #tenant.picture = data['picture']
-        tenant.picture = db.Blob(pic)
+        tenant.picture = db.Blob(data['picture'])
         tenant.put()
         #return tenant.to_dict()
         return tenant.toDict()

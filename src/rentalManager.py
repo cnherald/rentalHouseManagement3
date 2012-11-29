@@ -65,7 +65,7 @@ class RESTfulHandler(webapp.RequestHandler):
 #        tenant.put()
 #        tenant = simplejson.dumps(tenant.toDict())
 #        self.response.out.write(tenant)
-        pic = self.request.get('img')
+    
         self.response.headers['Content-Type'] = 'application/json'
         jsonString = self.request.body          
         inputData = simplejson.loads(jsonString) #Decoding JSON 
@@ -75,7 +75,7 @@ class RESTfulHandler(webapp.RequestHandler):
 #        tenantRegisterResponse = {'tenantRegisterMsg':'Congratulations, you have registered a new tenant successfully!'}
 #        jsonResponse = simplejson.dumps(tenantRegisterResponse)
 #        return self.response.out.write(jsonResponse)
-        tenant = simplejson.dumps(Tenants().registerTenant(inputData,key,pic))
+        tenant = simplejson.dumps(Tenants().registerTenant(inputData,key))
         self.response.out.write(tenant)
     
     def put(self, id):
@@ -121,14 +121,14 @@ class TenantHandler(webapp.RequestHandler):
 
         self.response.out.write(template.render(path, template_values)) 
 
-class UploadHandler(webapp.RequestHandler):        
-    def post(self):
-        avatar = self.request.get('img')    
+#class UploadHandler(webapp.RequestHandler):        
+#    def post(self):
+#        avatar = self.request.get('img')    
         
         
 application = webapp.WSGIApplication(
                      [('/', MainHandler),
-                     ('/upload',UploadHandler),
+                     #('/upload',UploadHandler),
                     #('/tenants',TenantHandler),
                       ('/tenants\/?([0-9]*)', RESTfulHandler)],
                       debug=True)
