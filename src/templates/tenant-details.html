@@ -1,4 +1,5 @@
-<div enctype="multipart/form-data">
+
+
 <div class="form-left-col">
     <!--<form  enctype="multipart/form-data">-->
     <label>Id:</label>
@@ -25,6 +26,10 @@
 	<label>Register Date:</label>
     <input type="text" id="registerDate" name="registerDate"  value="<%= registerDate %>"/>
 
+    <form  enctype="multipart/form-data">
+    <div><input type="file" id="img" name="img" size="50" /></div>
+    <div><input type="submit" value="Upload" /></div>
+    </form>
     <button class="save">Save</button>
     <button class="delete">Delete</button>
     <!--</form>-->
@@ -33,12 +38,11 @@
 <div class="form-right-col" >
 
     
-    <div><input type="file" id="img" name="img" size="50" /></div>
-    <div><input type="submit" value="Upload Image" /></div>
+    <!--<div><input type="file" id="img" name="img" size="50" /></div>
+    <div><input type="submit" value="Upload Image" /></div>-->
     
     <!--<input type="file" id="img" name="image" height="300" src="img/<%= picture %>"/>-->
     <!--<img height="300" src="img/<%= picture %>"/>-->
     <label>Notes:</label>
     <textarea id="description" name="description"><%= description %></textarea>
-</div>
 </div>
