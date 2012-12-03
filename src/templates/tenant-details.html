@@ -26,10 +26,13 @@
 	<label>Register Date:</label>
     <input type="text" id="registerDate" name="registerDate"  value="<%= registerDate %>"/>
 
-    <form  enctype="multipart/form-data">
-    <div><input type="file" id="img" name="img" size="50" /></div>
+    <!--<form  enctype="multipart/form-data">
+    <input type="file" id="img" name="img" size="50" onchange="setImage(this);" />
     <div><input type="submit" value="Upload" /></div>
-    </form>
+    </form>-->
+    <input type="file" id="browse" name="browse" size="50"  placeholder="Photo" checked="checked" class="upload" />
+    <input type="button" onclick="javascript:onbrowse()"  class="unknown" value="test"/>
+    <img id="prevImage" style="display:none;" />
     <button class="save">Save</button>
     <button class="delete">Delete</button>
     <!--</form>-->
