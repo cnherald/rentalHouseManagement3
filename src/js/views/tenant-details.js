@@ -87,21 +87,21 @@ function($, _, Backbone, tpl) {
 
 );
 
-function setImage1 (file) {
-    if(document.all)
-        document.getElementById('prevImage').src = file.value;
-    else
-        document.getElementById('prevImage').src = file.files.item(0).getAsDataURL();
-    if(document.getElementById('prevImage').src.length >0 )
-        document.getElementById('prevImage').styly.display = 'block';
-}
+// function setImage1 (file) {
+//     if(document.all)
+//         document.getElementById('prevImage').src = file.value;
+//     else
+//         document.getElementById('prevImage').src = file.files.item(0).getAsDataURL();
+//     if(document.getElementById('prevImage').src.length >0 )
+//         document.getElementById('prevImage').styly.display = 'block';
+// }
 
-//$(".upload").change(function () {
-function setImage (this) {
+
+function setImage (this){
     var fileObj = this,
         file;
-    
-    if (fileObj.files) {
+
+    if (fileObj.files){
         file = fileObj.files[0];
         var fr = new FileReader;
         fr.onloadend = changeimg;
@@ -110,18 +110,35 @@ function setImage (this) {
         file = fileObj.value;
         changeimg(file);
     }
+
+
 }
-
-function onbrowse() {
-    document.getElementById('browse').click();
-}
-
-
-function changeimg(str) {
-    if(typeof str === "object") {
-        str = str.target.result; // file reader
-    }
+//$(".upload").change(function () {
+// function setImage (this) {
+//     var fileObj = this,
+//         file;
     
-    $(".unknown").css({"background-size":  "100px 100px",
-                       "background-image": "url(" + str + ")"});
-}
+//     if (fileObj.files) {
+//         file = fileObj.files[0];
+//         var fr = new FileReader;
+//         fr.onloadend = changeimg;
+//         fr.readAsDataURL(file)
+//     } else {
+//         file = fileObj.value;
+//         changeimg(file);
+//     }
+// }
+
+// function onbrowse() {
+//     document.getElementById('browse').click();
+// }
+
+
+// function changeimg(str) {
+//     if(typeof str === "object") {
+//         str = str.target.result; // file reader
+//     }
+    
+//     $(".unknown").css({"background-size":  "100px 100px",
+//                        "background-image": "url(" + str + ")"});
+// }
