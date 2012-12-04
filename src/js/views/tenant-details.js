@@ -87,7 +87,7 @@ function($, _, Backbone, tpl) {
 
 );
 
-function setImage (file) {
+function setImage1 (file) {
     if(document.all)
         document.getElementById('prevImage').src = file.value;
     else
@@ -96,7 +96,8 @@ function setImage (file) {
         document.getElementById('prevImage').styly.display = 'block';
 }
 
-$(".upload").change(function () {
+//$(".upload").change(function () {
+function setImage (this) {
     var fileObj = this,
         file;
     
@@ -109,7 +110,7 @@ $(".upload").change(function () {
         file = fileObj.value;
         changeimg(file);
     }
-});
+}
 
 function onbrowse() {
     document.getElementById('browse').click();
