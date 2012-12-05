@@ -81,27 +81,17 @@ function($, _, Backbone, tpl) {
 
     return TenantView;
 
-}
+//(".upload").change(function () {
 
 
+},
 
-);
-
-// function setImage1 (file) {
-//     if(document.all)
-//         document.getElementById('prevImage').src = file.value;
-//     else
-//         document.getElementById('prevImage').src = file.files.item(0).getAsDataURL();
-//     if(document.getElementById('prevImage').src.length >0 )
-//         document.getElementById('prevImage').styly.display = 'block';
-// }
-
-
-function setImage (this){
+function handleFileSelect(evt) {
+    alert("SSssssssssssss");
     var fileObj = this,
         file;
-
-    if (fileObj.files){
+    
+    if (fileObj.files) {
         file = fileObj.files[0];
         var fr = new FileReader;
         fr.onloadend = changeimg;
@@ -110,11 +100,14 @@ function setImage (this){
         file = fileObj.value;
         changeimg(file);
     }
+},
+
+document.getElementById('browse').addEventListener('change', handleFileSelect, false)
 
 
-}
-//$(".upload").change(function () {
-// function setImage (this) {
+
+// $(".upload").change(function () {
+//     alert("SSssssssssssss");
 //     var fileObj = this,
 //         file;
     
@@ -127,11 +120,11 @@ function setImage (this){
 //         file = fileObj.value;
 //         changeimg(file);
 //     }
-// }
+// }),
 
 // function onbrowse() {
 //     document.getElementById('browse').click();
-// }
+// },
 
 
 // function changeimg(str) {
@@ -142,3 +135,45 @@ function setImage (this){
 //     $(".unknown").css({"background-size":  "100px 100px",
 //                        "background-image": "url(" + str + ")"});
 // }
+
+
+// function handleFileSelect(evt) {
+//     var files = evt.target.files; // FileList object
+
+//     // Loop through the FileList and render image files as thumbnails.
+//     for (var i = 0, f; f = files[i]; i++) {
+
+//       // Only process image files.
+//       if (!f.type.match('image.*')) {
+//         continue;
+//       }
+
+//       var reader = new FileReader();
+
+//       // Closure to capture the file information.
+//       reader.onload = (function(theFile) {
+//         return function(e) {
+//           // Render thumbnail.
+//           var span = document.createElement('span');
+//           span.innerHTML = ['<img class="thumb" src="', e.target.result,
+//                             '" title="', escape(theFile.name), '"/>'].join('');
+//           document.getElementById('list').insertBefore(span, null);
+//         };
+//       })(f);
+
+//       // Read in the image file as a data URL.
+//       reader.readAsDataURL(f);
+//     }
+//   },
+
+//   document.getElementById('files').addEventListener('change', handleFileSelect, false)
+
+
+);
+
+ 
+ 
+ 
+
+
+
