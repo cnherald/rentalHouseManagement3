@@ -84,10 +84,7 @@ function($, _, Backbone, tpl) {
 //(".upload").change(function () {
 
 
-},
-
-function handleFileSelect(evt) {
-    alert("SSssssssssssss");
+$(".upload").change(function () {
     var fileObj = this,
         file;
     
@@ -100,76 +97,23 @@ function handleFileSelect(evt) {
         file = fileObj.value;
         changeimg(file);
     }
-},
+});
 
-document.getElementById('browse').addEventListener('change', handleFileSelect, false)
+function onbrowse() {
+    document.getElementById('browse').click();
+}
 
-
-
-// $(".upload").change(function () {
-//     alert("SSssssssssssss");
-//     var fileObj = this,
-//         file;
+function changeimg(str) {
+    if(typeof str === "object") {
+        str = str.target.result; // file reader
+    }
     
-//     if (fileObj.files) {
-//         file = fileObj.files[0];
-//         var fr = new FileReader;
-//         fr.onloadend = changeimg;
-//         fr.readAsDataURL(file)
-//     } else {
-//         file = fileObj.value;
-//         changeimg(file);
-//     }
-// }),
-
-// function onbrowse() {
-//     document.getElementById('browse').click();
-// },
+    $(".unknown").css({"background-size":  "100px 100px",
+                       "background-image": "url(" + str + ")"});
+}
 
 
-// function changeimg(str) {
-//     if(typeof str === "object") {
-//         str = str.target.result; // file reader
-//     }
-    
-//     $(".unknown").css({"background-size":  "100px 100px",
-//                        "background-image": "url(" + str + ")"});
-// }
-
-
-// function handleFileSelect(evt) {
-//     var files = evt.target.files; // FileList object
-
-//     // Loop through the FileList and render image files as thumbnails.
-//     for (var i = 0, f; f = files[i]; i++) {
-
-//       // Only process image files.
-//       if (!f.type.match('image.*')) {
-//         continue;
-//       }
-
-//       var reader = new FileReader();
-
-//       // Closure to capture the file information.
-//       reader.onload = (function(theFile) {
-//         return function(e) {
-//           // Render thumbnail.
-//           var span = document.createElement('span');
-//           span.innerHTML = ['<img class="thumb" src="', e.target.result,
-//                             '" title="', escape(theFile.name), '"/>'].join('');
-//           document.getElementById('list').insertBefore(span, null);
-//         };
-//       })(f);
-
-//       // Read in the image file as a data URL.
-//       reader.readAsDataURL(f);
-//     }
-//   },
-
-//   document.getElementById('files').addEventListener('change', handleFileSelect, false)
-
-
-);
+});
 
  
  
