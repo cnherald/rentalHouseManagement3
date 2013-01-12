@@ -84,7 +84,16 @@ function($, _, Backbone, tpl) {
 //(".upload").change(function () {
 
 
-$(".upload").change(function () {
+
+
+
+});
+
+ 
+ 
+ //$(".upload").change(function () {
+$("#browse").change(function()){
+    alert("here is the pic !!");
     var fileObj = this,
         file;
     
@@ -111,13 +120,6 @@ function changeimg(str) {
     $(".unknown").css({"background-size":  "100px 100px",
                        "background-image": "url(" + str + ")"});
 }
-
-
-});
-
- 
- 
- 
 
 
 
