@@ -21,7 +21,8 @@ function($, _, Backbone, tpl) {
         events: {
             "change input": "change",
             "click .save": "saveTenant",
-            "click .delete": "deleteTenant"
+            "click .delete": "deleteTenant",
+            "change .upload": "loadFile"
         },
 
         change: function(event) {
@@ -75,6 +76,32 @@ function($, _, Backbone, tpl) {
                 }
             });
             return false;
+        },
+
+        loadFile: function(){
+            alert("here is the pic !!");
+            var fileObj = this,
+                file;
+            
+            if (fileObj.files) {
+                file = fileObj.files[0];
+                var fr = new FileReader;
+                fr.onloadend = changeimg;
+                fr.readAsDataURL(file)
+            } else {
+                file = fileObj.value;
+                changeimg(file);
+            }
+
+        },
+
+        changeimg: function (str) {
+            if(typeof str === "object") {
+                    str = str.target.result; // file reader
+                }
+                
+                $(".unknown").css({"background-size":  "100px 100px",
+                                   "background-image": "url(" + str + ")"});
         }
 
     });
@@ -92,7 +119,8 @@ function($, _, Backbone, tpl) {
  
  
  //$(".upload").change(function () {
-$("#browse").change(function()){
+
+/*$("#browse").change(function()){
     alert("here is the pic !!");
     var fileObj = this,
         file;
@@ -120,6 +148,6 @@ function changeimg(str) {
     $(".unknown").css({"background-size":  "100px 100px",
                        "background-image": "url(" + str + ")"});
 }
-
+*/
 
 
