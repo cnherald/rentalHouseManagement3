@@ -78,20 +78,25 @@ function($, _, Backbone, tpl) {
             return false;
         },
 
-        loadFile: function(){
+        loadFile: function(evt){
             alert("here is the pic !!");
-
-            if (this.files) {
-                file = this.files[0];
+            var files = evt.target.files;
+            if (files) {
+                file = files[0];
                 var fr = new FileReader;
-                fr.onloadend = changeimg;
-                fr.readAsDataURL(file)
+                fr.onloadend = function(evt){
+                    evt.target.result;
+
+                };
+                fr.readAsDataURL(file);
             } else {
                 file = this.value;
                 changeimg(file);
             }
 
         },
+
+
 
         changeimg: function (str) {
             if(typeof str === "object") {
