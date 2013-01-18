@@ -80,16 +80,14 @@ function($, _, Backbone, tpl) {
 
         loadFile: function(){
             alert("here is the pic !!");
-            var fileObj = this,
-                file;
-            
-            if (fileObj.files) {
-                file = fileObj.files[0];
+
+            if (this.files) {
+                file = this.files[0];
                 var fr = new FileReader;
                 fr.onloadend = changeimg;
                 fr.readAsDataURL(file)
             } else {
-                file = fileObj.value;
+                file = this.value;
                 changeimg(file);
             }
 
