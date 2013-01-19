@@ -83,12 +83,20 @@ function($, _, Backbone, tpl) {
             var files = evt.target.files;
             if (files) {
                 file = files[0];
-                var fr = new FileReader;
-                fr.onloadend = function(evt){
-                    evt.target.result;
+                /*var fr = new FileReader();*/
+ /*               fr.onloadend = function(aImg){
+                    aImg=aImg.target.result;
 
-                };
-                fr.readAsDataURL(file);
+                };*/
+/*                fr.onloadend = changeimg(ttt);
+                fr.readAsDataURL(file);*/
+                var img = document.createElement﻿("img");
+                img.classList.add("obj");
+                img.file = file﻿;
+                //preview.appendChild﻿(img);
+                var reader = new FileReader();
+                reader.onload ﻿= (function(aImg﻿) { return function(e) { aImg.src = e.target.result; }; }﻿)(img);﻿
+                reader.readAsDataURL(file);
             } else {
                 file = this.value;
                 changeimg(file);
