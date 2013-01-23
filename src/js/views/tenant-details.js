@@ -90,12 +90,12 @@ function($, _, Backbone, tpl) {
                 };*/
 /*                fr.onloadend = changeimg(ttt);
                 fr.readAsDataURL(file);*/
-                var img = document.createElement﻿("img");
-                img.classList.add("obj");
-                img.file = file﻿;
+                // var img = document.createElement﻿("img");
+                // img.classList.add("obj");
+                // img.file = file﻿;
                 //preview.appendChild﻿(img);
                 var reader = new FileReader();
-                reader.onload ﻿= (function(aImg﻿) { return function(e) { aImg.src = e.target.result; }; }﻿)(img);﻿
+                reader.onloadend ﻿= (function(aImg﻿) { return function(e) { aImg.src = e.target.result; }; }﻿)(file);﻿
                 reader.readAsDataURL(file);
             } else {
                 file = this.value;
