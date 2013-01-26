@@ -95,7 +95,15 @@ function($, _, Backbone, tpl) {
                 // img.file = file﻿;
                 //preview.appendChild﻿(img);
                 var reader = new FileReader();
-                reader.onloadend ﻿= (function(aImg﻿) { return function(e) { aImg.src = e.target.result; }; }﻿)(file);﻿
+                reader.onloadend ﻿= (function(aImg﻿) {
+                     return function(e) { 
+                        aImg.src = e.target.result; 
+
+                        // $(".unknown").css({"background-size":  "100px 100px", "background-image": "url(" + str + ")"});
+                     };
+                     
+
+                      }﻿)(file);﻿
                 reader.readAsDataURL(file);
             } else {
                 file = this.value;

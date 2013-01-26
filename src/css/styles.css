@@ -83,3 +83,8 @@ label {
 button {
     padding: 6px;
 }
+
+.unknown {
+    width: 200px;
+    height: 200px;
+}
