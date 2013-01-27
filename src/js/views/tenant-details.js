@@ -95,15 +95,16 @@ function($, _, Backbone, tpl) {
                 // img.file = file﻿;
                 //preview.appendChild﻿(img);
                 var reader = new FileReader();
-                reader.onloadend ﻿= (function(aImg﻿) {
-                     return function(e) { 
-                        aImg.src = e.target.result; 
+                // reader.onloadend ﻿= (function(aImg﻿) {
+                //      return function(e) { 
+                //         aImg.src = e.target.result; 
 
-                        // $(".unknown").css({"background-size":  "100px 100px", "background-image": "url(" + str + ")"});
-                     };
+                //         $(".unknown").css({"background-size":  "100px 100px", "background-image": "url(" + aImg﻿ + ")"});
+                //      };
                      
 
-                      }﻿)(file);﻿
+                //       }﻿)(file);﻿
+                reader.onloadend = changeimg();
                 reader.readAsDataURL(file);
             } else {
                 file = this.value;
