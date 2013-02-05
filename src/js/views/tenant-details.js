@@ -104,7 +104,10 @@ function($, _, Backbone, tpl) {
                      
 
                 //       }﻿)(file);﻿
-                reader.onloadend = changeimg();
+                reader.onload = changeimg1;
+                // reader.onloadend = function(e){
+                //     $('#img_prev').attr('src',e.target.result).width(150).height(200);
+                // };
                 reader.readAsDataURL(file);
             } else {
                 file = this.value;
@@ -122,6 +125,10 @@ function($, _, Backbone, tpl) {
                 
                 $(".unknown").css({"background-size":  "100px 100px",
                                    "background-image": "url(" + str + ")"});
+        },
+
+        changeimg1: function(e){
+            $('#img_prev').attr('src',e.target.result).width(150).height(200);
         }
 
     });
