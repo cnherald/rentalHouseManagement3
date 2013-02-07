@@ -99,41 +99,44 @@ function($, _, Backbone, tpl) {
                 //      return function(e) { 
                 //         aImg.src = e.target.result; 
 
-                //         $(".unknown").css({"background-size":  "100px 100px", "background-image": "url(" + aImg﻿ + ")"});
+                //       $(".unknown").css({"background-size":  "100px 100px", "background-image": "url(" + aImg﻿ + ")"});
                 //      };
                      
 
                 //       }﻿)(file);﻿
-                reader.onload = changeimg1;
-                // reader.onloadend = function(e){
-                //     $('#img_prev').attr('src',e.target.result).width(150).height(200);
-                // };
+                //reader.onload = changeimg1;
+                reader.onloadend = function(e){
+                    $('#img_prev').attr('src',e.target.result).width(150).height(200);
+                };
                 reader.readAsDataURL(file);
             } else {
                 file = this.value;
                 changeimg(file);
             }
 
-        },
-
-
-
-        changeimg: function (str) {
-            if(typeof str === "object") {
-                    str = str.target.result; // file reader
-                }
-                
-                $(".unknown").css({"background-size":  "100px 100px",
-                                   "background-image": "url(" + str + ")"});
-        },
-
-        changeimg1: function(e){
-            $('#img_prev').attr('src',e.target.result).width(150).height(200);
         }
+
+
+
+        // changeimg: function (str) {
+        //     if(typeof str === "object") {
+        //             str = str.target.result; // file reader
+        //         }
+                
+        //         $(".unknown").css({"background-size":  "100px 100px",
+        //                            "background-image": "url(" + str + ")"});
+        // }
+
+        // changeimg1: function(e){
+        //     $('#img_prev').attr('src',e.target.result).width(150).height(200);
+        // },
 
     });
 
     return TenantView;
+
+
+
 
 //(".upload").change(function () {
 
@@ -143,8 +146,7 @@ function($, _, Backbone, tpl) {
 
 });
 
- 
- 
+
  //$(".upload").change(function () {
 
 /*$("#browse").change(function()){
