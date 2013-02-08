@@ -22,7 +22,8 @@ function($, _, Backbone, tpl) {
             "change input": "change",
             "click .save": "saveTenant",
             "click .delete": "deleteTenant",
-            "change .upload": "loadFile"
+            "change .upload": "loadFile",
+            "click .imageClass": "clickImage"
         },
 
         change: function(event) {
@@ -106,7 +107,8 @@ function($, _, Backbone, tpl) {
                 //       }﻿)(file);﻿
                 //reader.onload = changeimg1;
                 reader.onload = function(e){
-                    $('#img_prev').attr('src',e.target.result).width(150).height(200);
+                    //$('#img_prev').attr('src',e.target.result).width(200).height(200);
+                    $(".imageClass").css({"background-size":  "200px 200px", "background-image": "url(" + e.target.result + ")"});
                 };
                 reader.readAsDataURL(file);
             } else {
@@ -114,8 +116,11 @@ function($, _, Backbone, tpl) {
                 changeimg(file);
             }
 
-        }
+        },
 
+        clickImage: function(){
+                document.getElementById('browse').click();
+        }
 
 
         // changeimg: function (str) {
