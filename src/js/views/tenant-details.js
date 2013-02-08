@@ -105,7 +105,7 @@ function($, _, Backbone, tpl) {
 
                 //       }﻿)(file);﻿
                 //reader.onload = changeimg1;
-                reader.onloadend = function(e){
+                reader.onload = function(e){
                     $('#img_prev').attr('src',e.target.result).width(150).height(200);
                 };
                 reader.readAsDataURL(file);
