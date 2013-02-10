@@ -45,7 +45,7 @@ function($, _, Backbone, tpl) {
                 phoneNumber: $('#phoneNumber').val(),
                 email: $('#email').val(),
 				registerDate: $('#registerDate').val(),
-                picture: $('#img').val()
+                picture: $('#browse').val()
             });
             if (this.model.isNew()) {
                 var self = this;
