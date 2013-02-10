@@ -45,7 +45,7 @@ class Tenants(db.Model):
             'email': self.email,
             #'registerDate': self.registerDate
             'registerDate': self.registerDate.isoformat(),
-            #'picture': self.picture
+            'picture': self.picture
             }
         return tenant
     
