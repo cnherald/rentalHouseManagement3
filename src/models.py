@@ -104,7 +104,8 @@ class Tenants(db.Model):
         self.phoneNumber = data['phoneNumber']
         self.email = data['email']
         registerDate = datetime.datetime.strptime(data['registerDate'],"%Y-%m-%d")
-        self.registerDate = registerDate.date()    
+        self.registerDate = registerDate.date()
+        #self.picture = db.Blob(urlfetch.Fetch(data['picture'].content))
         self.put()
         #return tenant.to_dict()
         return self.toDict()

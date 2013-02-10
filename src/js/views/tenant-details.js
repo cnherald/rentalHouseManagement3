@@ -84,31 +84,14 @@ function($, _, Backbone, tpl) {
             var files = evt.target.files;
             if (files) {
                 file = files[0];
-                /*var fr = new FileReader();*/
- /*               fr.onloadend = function(aImg){
-                    aImg=aImg.target.result;
-
-                };*/
-/*                fr.onloadend = changeimg(ttt);
-                fr.readAsDataURL(file);*/
-                // var img = document.createElement﻿("img");
-                // img.classList.add("obj");
-                // img.file = file﻿;
-                //preview.appendChild﻿(img);
                 var reader = new FileReader();
-                // reader.onloadend ﻿= (function(aImg﻿) {
-                //      return function(e) { 
-                //         aImg.src = e.target.result; 
-
-                //       $(".unknown").css({"background-size":  "100px 100px", "background-image": "url(" + aImg﻿ + ")"});
-                //      };
-                     
-
-                //       }﻿)(file);﻿
-                //reader.onload = changeimg1;
-                reader.onload = function(e){
-                    //$('#img_prev').attr('src',e.target.result).width(200).height(200);
-                    $(".imageClass").css({"background-size":  "200px 200px", "background-image": "url(" + e.target.result + ")"});
+//this block works for preloading the image
+/*                reader.onload = function(e){
+                    $('#img_prev').attr('src',e.target.result).width(200).height(200);
+                    $(".imageClass").css({"background-size":  "200px 200px", "background-image": "url(" + e.target.result + ")"});*/
+                reader.onload = function(){   
+                    $('#img_prev').attr('src',reader.result).width(200).height(200);
+                    
                 };
                 reader.readAsDataURL(file);
             } else {
@@ -123,65 +106,13 @@ function($, _, Backbone, tpl) {
         }
 
 
-        // changeimg: function (str) {
-        //     if(typeof str === "object") {
-        //             str = str.target.result; // file reader
-        //         }
-                
-        //         $(".unknown").css({"background-size":  "100px 100px",
-        //                            "background-image": "url(" + str + ")"});
-        // }
-
-        // changeimg1: function(e){
-        //     $('#img_prev').attr('src',e.target.result).width(150).height(200);
-        // },
-
     });
 
     return TenantView;
 
 
-
-
-//(".upload").change(function () {
-
-
-
-
-
 });
 
 
- //$(".upload").change(function () {
-
-/*$("#browse").change(function()){
-    alert("here is the pic !!");
-    var fileObj = this,
-        file;
-    
-    if (fileObj.files) {
-        file = fileObj.files[0];
-        var fr = new FileReader;
-        fr.onloadend = changeimg;
-        fr.readAsDataURL(file)
-    } else {
-        file = fileObj.value;
-        changeimg(file);
-    }
-});
-
-function onbrowse() {
-    document.getElementById('browse').click();
-}
-
-function changeimg(str) {
-    if(typeof str === "object") {
-        str = str.target.result; // file reader
-    }
-    
-    $(".unknown").css({"background-size":  "100px 100px",
-                       "background-image": "url(" + str + ")"});
-}
-*/
 
 
