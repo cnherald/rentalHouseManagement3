@@ -89,7 +89,7 @@ function($, _, Backbone, tpl) {
 /*                reader.onload = function(e){
                     $('#img_prev').attr('src',e.target.result).width(200).height(200);
                     $(".imageClass").css({"background-size":  "200px 200px", "background-image": "url(" + e.target.result + ")"});*/
-                reader.onload = function(){   
+                reader.onloadend = function(){   
                     $('#img_prev').attr('src',reader.result).width(200).height(200);
                     
                 };
