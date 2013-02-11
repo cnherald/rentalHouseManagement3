@@ -106,7 +106,7 @@ class Tenants(db.Model):
         registerDate = datetime.datetime.strptime(data['registerDate'],"%Y-%m-%d")
         self.registerDate = registerDate.date()
         #self.picture = db.Blob(urlfetch.Fetch(data['picture'].content))
-        self.picture = db.Blob(data['picture'])
+        self.picture = db.Blob(data['picture'].encode('utf-8'))
         self.put()
         #return tenant.to_dict()
         return self.toDict()
