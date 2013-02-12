@@ -5,6 +5,7 @@ Created on Jun 15, 2012
 '''
 
 from google.appengine.ext import db
+from google.appengine.api import images
 from django.http import HttpResponse
 #from datetime import date
 from datetime import timedelta
@@ -106,7 +107,8 @@ class Tenants(db.Model):
         registerDate = datetime.datetime.strptime(data['registerDate'],"%Y-%m-%d")
         self.registerDate = registerDate.date()
         #self.picture = db.Blob(urlfetch.Fetch(data['picture'].content))
-        self.picture = db.Blob(data['picture'].encode('utf-8'))
+        #self.picture = db.Blob(images.resize(data['picture'].encode('utf-8')),32,32)
+        self.picture = db.Blob(images.resize(data['picture'],32,32))
         self.put()
         #return tenant.to_dict()
         return self.toDict()
