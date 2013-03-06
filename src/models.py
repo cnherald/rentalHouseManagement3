@@ -90,7 +90,9 @@ class Tenants(db.Model):
         registerDate = datetime.datetime.strptime(data['registerDate'],"%Y-%m-%d")
         tenant.registerDate = registerDate.date()    
         #tenant.picture = data['picture']
-        tenant.picture = db.Blob(data['picture'])
+        image = str(data['picture']) 
+        #tenant.picture = db.Blob(data['picture'])
+        tenant.picture = db.Blob(image)
         tenant.put()
         #return tenant.to_dict()
         return tenant.toDict()
