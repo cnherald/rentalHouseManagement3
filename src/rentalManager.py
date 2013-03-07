@@ -37,7 +37,7 @@ class MainHandler(webapp.RequestHandler):
         self.response.out.write(template.render(path, None))
 
 class RESTfulHandler(webapp.RequestHandler):
-    def get(self, id):
+    def get(self, tenantId):
         key = self.request.cookies['tenantlist']
         tenantlist = db.get(key)
         tenants = []
@@ -48,9 +48,10 @@ class RESTfulHandler(webapp.RequestHandler):
             tenants.append(tenant.toDict())
            # tenants.append(tenant.to_dict())
         tenants = simplejson.dumps(tenants)
+        self.response.headers['Content-Type'] = 'image/jpeg'
         self.response.out.write(tenants)
     
-    def post(self, id):
+    def post(self ):
         key = self.request.cookies['tenantlist']
 #        tenantList = db.get(key)
 #        tenant = simplejson.loads(self.request.body)
@@ -78,10 +79,10 @@ class RESTfulHandler(webapp.RequestHandler):
         tenant = simplejson.dumps(Tenants().registerTenant(inputData,key))
         self.response.out.write(tenant)
     
-    def put(self, id):
+    def put(self, tenantId):
         key = self.request.cookies['tenantlist']
         tenantlist = db.get(key)
-        tenant = Tenants.get_by_id(int(id))
+        tenant = Tenants.get_by_id(int(tenantId))
         if tenant.tenantlist.key() == tenantlist.key():           
             inputData = simplejson.loads(self.request.body)
 #            tenant.content = inputData['content']
@@ -95,10 +96,10 @@ class RESTfulHandler(webapp.RequestHandler):
             self.error(403)
         #self.response.out.write()
         
-    def delete(self, id):
+    def delete(self, tenantId):
         key = self.request.cookies['tenantlist']
         tenantlist = db.get(key)
-        tenant = Tenants.get_by_id(int(id))
+        tenant = Tenants.get_by_id(int(tenantId))
         if tenant.tenantlist.key() == tenantlist.key():
             #tmp = tenant.toDict()
             tenant.delete()
