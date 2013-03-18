@@ -20,7 +20,8 @@ function($, _, Backbone, tpl) {
 
         events: {
             "change input": "change",
-            "click .save": "saveTenant",
+            //"click .save": "saveTenant",
+            "click .save": "beforeSave",
             "click .delete": "deleteTenant",
             "change .upload": "loadFile",
             "click .imageClass": "clickImage"
@@ -36,6 +37,23 @@ function($, _, Backbone, tpl) {
             // this.model.set(change);
         },
 
+
+        beforeSave: function(){
+            var self = this;
+                    if (this.pictureFile) {
+            this.model.set("picture", this.pictureFile.name);
+            utils.uploadFile(this.pictureFile,
+                function () {
+                    self.saveTenant();
+                }
+            );
+        } else {
+            this.saveTenant();
+        }
+        return false;
+
+        },
+
         saveTenant: function() {
             this.model.set({				
                 firstName: $('#firstName').val(),
@@ -44,8 +62,8 @@ function($, _, Backbone, tpl) {
                 age: $('#age').val(),
                 phoneNumber: $('#phoneNumber').val(),
                 email: $('#email').val(),
-				registerDate: $('#registerDate').val(),
-                picture: $('#browse').val()
+				registerDate: $('#registerDate').val()
+                //picture: $('#browse').val()
             });
             if (this.model.isNew()) {
                 var self = this;
@@ -83,7 +101,7 @@ function($, _, Backbone, tpl) {
             alert("here is the pic !!");
             var files = evt.target.files;
             if (files) {
-                file = files[0];
+                pictureFile = files[0];
                 var reader = new FileReader();
 //this block works for preloading the image
 /*                reader.onload = function(e){
@@ -93,10 +111,10 @@ function($, _, Backbone, tpl) {
                     $('#img_prev').attr('src',reader.result).width(200).height(200);
                     
                 };
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(pictureFile);
             } else {
-                file = this.value;
-                changeimg(file);
+                pictureFile = this.value;
+                changeimg(pictureFile);
             }
 
         },
