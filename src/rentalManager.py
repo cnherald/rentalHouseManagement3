@@ -130,7 +130,12 @@ class UploadHandler(webapp.RequestHandler):
     def post(self):
         key = self.request.cookies['tenantlist']
         self.response.headers['Content-Type'] = 'application/json'
-           
+        jsonString = self.request.body
+        data = simplejson.loads(jsonString) #Decoding JSON 
+        image = str(data['picture']) 
+        #tenant.picture = db.Blob(data['picture'])
+        #tenant.picture = db.Blob(image)
+        #tenant.put()   
     
 application = webapp.WSGIApplication(
                      [('/', MainHandler),
