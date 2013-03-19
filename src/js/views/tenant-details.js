@@ -23,7 +23,7 @@ function($, _, Backbone, tpl) {
             //"click .save": "saveTenant",
             "click .save": "beforeSave",
             "click .delete": "deleteTenant",
-            "change .upload": "loadFile",
+            "change .upload": "displayPicture",
             "click .imageClass": "clickImage"
         },
 
@@ -40,9 +40,9 @@ function($, _, Backbone, tpl) {
 
         beforeSave: function(){
             var self = this;
-                    if (this.pictureFile) {
+            if (this.pictureFile) {
             this.model.set("picture", this.pictureFile.name);
-            utils.uploadFile(this.pictureFile,
+            self.uploadFile(this.pictureFile,
                 function () {
                     self.saveTenant();
                 }
@@ -87,6 +87,27 @@ function($, _, Backbone, tpl) {
             return false;
         },
 
+        uploadFile: function (file, callbackSuccess) {
+            var self = this;
+            var data = new FormData();
+            data.append('file', file);
+            $.ajax({
+                url: 'uploadPicture',
+                type: 'POST',
+                data: data,
+                processData: false,
+                cache: false,
+                contentType: false
+            })
+            .done(function () {
+                console.log(file.name + " uploaded successfully");
+                callbackSuccess();
+            })
+            .fail(function () {
+                self.showAlert('Error!', 'An error occurred while uploading ' + file.name, 'alert-error');
+            });
+        },
+
         deleteTenant: function() {
             this.model.destroy({
                 success: function() {
@@ -97,11 +118,11 @@ function($, _, Backbone, tpl) {
             return false;
         },
 
-        loadFile: function(evt){
+        displayPicture: function(evt){
             alert("here is the pic !!");
             var files = evt.target.files;
             if (files) {
-                pictureFile = files[0];
+                this.pictureFile = files[0];
                 var reader = new FileReader();
 //this block works for preloading the image
 /*                reader.onload = function(e){
@@ -111,9 +132,9 @@ function($, _, Backbone, tpl) {
                     $('#img_prev').attr('src',reader.result).width(200).height(200);
                     
                 };
-                reader.readAsDataURL(pictureFile);
+                reader.readAsDataURL(this.pictureFile);
             } else {
-                pictureFile = this.value;
+                this.pictureFile = this.value;
                 changeimg(pictureFile);
             }
 

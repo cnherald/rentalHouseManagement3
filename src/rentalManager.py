@@ -125,11 +125,16 @@ class TenantHandler(webapp.RequestHandler):
 #class UploadHandler(webapp.RequestHandler):        
 #    def post(self):
 #        avatar = self.request.get('img')    
-        
-        
+
+class UploadHandler(webapp.RequestHandler):     
+    def post(self):
+        key = self.request.cookies['tenantlist']
+        self.response.headers['Content-Type'] = 'application/json'
+           
+    
 application = webapp.WSGIApplication(
                      [('/', MainHandler),
-                     #('/upload',UploadHandler),
+                     ('/uploadPicture',UploadHandler),
                     #('/tenants',TenantHandler),
                       ('/tenants\/?([0-9]*)', RESTfulHandler)],
                       debug=True)
