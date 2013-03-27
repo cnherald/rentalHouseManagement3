@@ -37,7 +37,8 @@ class MainHandler(webapp.RequestHandler):
         self.response.out.write(template.render(path, None))
 
 class RESTfulHandler(webapp.RequestHandler):
-    def get(self, tenantId):
+    #def get(self, tenantId):
+    def get(self):
         key = self.request.cookies['tenantlist']
         tenantlist = db.get(key)
         tenants = []
@@ -141,7 +142,8 @@ application = webapp.WSGIApplication(
                      [('/', MainHandler),
                      ('/uploadPicture',UploadHandler),
                     #('/tenants',TenantHandler),
-                      ('/tenants\/?([0-9]*)', RESTfulHandler)],
+                      #('/tenants\/?([0-9]*)', RESTfulHandler)],
+                      ('/tenants/?', RESTfulHandler)],
                       debug=True)
 
 def main():
