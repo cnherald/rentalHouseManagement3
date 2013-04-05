@@ -1,24 +1,21 @@
-from google.appengine.api import users
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
-import os
-from google.appengine.ext.webapp import template
-from models import Tenants
-from models import TenantList
-from google.appengine.ext import db
+#from google.appengine.api import users
+
+#import os
+#from google.appengine.ext.webapp import template
 #import simplejson
-import django.utils.simplejson as json
-from datetime import datetime
-
-
-from google.appengine.ext.webapp import template
+#import django.utils.simplejson as json
 #from google.appengine.ext import webapp
 #from google.appengine.ext import db
 #from google.appengine.ext.webapp.util import run_wsgi_app
-
-from django.utils import simplejson
-
 #from datetime import datetime
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp.util import run_wsgi_app
+from models import Tenants
+from models import TenantList
+from google.appengine.ext import db
+from datetime import datetime
+from google.appengine.ext.webapp import template
+from django.utils import simplejson
 import os, Cookie
 
 
@@ -47,7 +44,7 @@ class RESTfulHandler(webapp.RequestHandler):
         query.filter("tenantlist =", tenantlist.key())
         for tenant in query:
             tenants.append(tenant.toDict())
-           # tenants.append(tenant.to_dict())
+            # tenants.append(tenant.to_dict())
         tenants = simplejson.dumps(tenants)
         self.response.headers['Content-Type'] = 'image/jpeg'
         self.response.out.write(tenants)
@@ -129,11 +126,11 @@ class TenantHandler(webapp.RequestHandler):
 
 class UploadHandler(webapp.RequestHandler):     
     def post(self):
-        key = self.request.cookies['tenantlist']
+        #key = self.request.cookies['tenantlist']
         self.response.headers['Content-Type'] = 'application/json'
-        jsonString = self.request.body
-        data = simplejson.loads(jsonString) #Decoding JSON 
-        image = str(data['picture']) 
+        #jsonString = self.request.body
+        #data = simplejson.loads(jsonString) #Decoding JSON 
+        #image = str(data['picture']) 
         #tenant.picture = db.Blob(data['picture'])
         #tenant.picture = db.Blob(image)
         #tenant.put()   
