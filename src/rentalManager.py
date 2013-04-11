@@ -126,8 +126,15 @@ class TenantHandler(webapp.RequestHandler):
 
 class UploadHandler(webapp.RequestHandler):     
     def post(self):
-        #key = self.request.cookies['tenantlist']
-        self.response.headers['Content-Type'] = 'application/json'
+        key = self.request.cookies['tenantlist']
+        tenantList = db.get(key)
+        tenant = Tenants()
+        tenant.tenantlist = tenantList.key()
+        pic = self.request.get("file")
+        tenant.picture = db.Blob(pic)
+        tenant.put()
+        
+        #self.response.headers['Content-Type'] = 'application/json'
         #jsonString = self.request.body
         #data = simplejson.loads(jsonString) #Decoding JSON 
         #image = str(data['picture']) 
