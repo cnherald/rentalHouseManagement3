@@ -20,8 +20,8 @@ function($, _, Backbone, tpl) {
 
         events: {
             "change input": "change",
-            //"click .save": "saveTenant",
-            "click .save": "beforeSave",
+            "click .save": "saveTenant",
+            //"click .save": "beforeSave",
             "click .delete": "deleteTenant",
             "change .upload": "displayPicture",
             "click .imageClass": "clickImage"
@@ -62,8 +62,9 @@ function($, _, Backbone, tpl) {
                 age: $('#age').val(),
                 phoneNumber: $('#phoneNumber').val(),
                 email: $('#email').val(),
-				registerDate: $('#registerDate').val()
+				registerDate: $('#registerDate').val(),
                 //picture: $('#browse').val()
+                picture: this.pictureFile.name
             });
             if (this.model.isNew()) {
                 var self = this;

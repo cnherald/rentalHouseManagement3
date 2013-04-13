@@ -51,31 +51,29 @@ class RESTfulHandler(webapp.RequestHandler):
     
     def post(self ):
         key = self.request.cookies['tenantlist']
-#        tenantList = db.get(key)
-#        tenant = simplejson.loads(self.request.body)
-#        tenant = Tenants(tenantList = tenantList.key(),
-#                 firstName   = tenant['FirstName'],
-#                 surname   = tenant['Surname'],
-#                 gender   = tenant['Gender'],
-#                 age   = tenant['Age'],
-#                 phoneNumber   = tenant['PhoneNumber'],
-#                 email = tenant['Email'],
-#                 registerDate = tenant['RegisterDate'])
-#        tenant.put()
-#        tenant = simplejson.dumps(tenant.toDict())
-#        self.response.out.write(tenant)
-    
-        self.response.headers['Content-Type'] = 'application/json'
-        jsonString = self.request.body          
-        inputData = simplejson.loads(jsonString) #Decoding JSON 
-#        Tenants().registerTenant(inputData,key) 
-#        #tenant = Tenant().registerTenant(data)
-#        #tenant.createRegisterActivityRecord()
-#        tenantRegisterResponse = {'tenantRegisterMsg':'Congratulations, you have registered a new tenant successfully!'}
-#        jsonResponse = simplejson.dumps(tenantRegisterResponse)
-#        return self.response.out.write(jsonResponse)
-        tenant = simplejson.dumps(Tenants().registerTenant(inputData,key))
-        self.response.out.write(tenant)
+        tenantList = db.get(key)
+        tenant = Tenants()
+        tenant.tenantlist = tenantList.key()
+        tenant.firstName = self.request.get('firstName')
+        tenant.surname = self.request.get('surname')
+        tenant.gender = self.request.get('gender')
+        tenant.age = int(self.request.get('age'))
+        tenant.phoneNumber = self.request.get('phoneNumber')
+        tenant.email = self.request.get('email')
+        registerDate = datetime.datetime.strptime(self.request.get('registerDate'),"%Y-%m-%d")
+        tenant.registerDate = registerDate.date()
+        #pic = self.request.get("file")
+        pic = self.request.get("picture")
+        tenant.picture = db.Blob(pic)
+        tenant.put()
+        
+#previous implementation        
+#         key = self.request.cookies['tenantlist']   
+#         self.response.headers['Content-Type'] = 'application/json'
+#         jsonString = self.request.body          
+#         inputData = simplejson.loads(jsonString) #Decoding JSON 
+#         tenant = simplejson.dumps(Tenants().registerTenant(inputData,key))
+#         self.response.out.write(tenant)
     
     def put(self, tenantId):
         key = self.request.cookies['tenantlist']
@@ -130,7 +128,7 @@ class UploadHandler(webapp.RequestHandler):
         tenantList = db.get(key)
         tenant = Tenants()
         tenant.tenantlist = tenantList.key()
-        pic = self.request.get("file")
+        pic = self.request.get("file")       
         tenant.picture = db.Blob(pic)
         tenant.put()
         
