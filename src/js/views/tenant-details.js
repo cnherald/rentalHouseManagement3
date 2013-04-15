@@ -68,7 +68,9 @@ function($, _, Backbone, tpl) {
             });
             if (this.model.isNew()) {
                 var self = this;
-                app.tenantList.create(this.model, { wait: true,
+                //app.tenantList.create(this.model, { wait: true,
+                    //app.tenantList.create(this.model.attributes, { wait: true,
+                    app.tenantList.create(this.model.toJSON(), { wait: true,    
                     success: function() {
 						alert("you have registered a new tenant!!!  ");						
                         app.navigate('tenants/' + self.model.id, false);
