@@ -128,7 +128,8 @@ class UploadHandler(webapp.RequestHandler):
         tenantList = db.get(key)
         tenant = Tenants()
         tenant.tenantlist = tenantList.key()
-        pic = self.request.get("file")       
+        pic = self.request.get("file")
+        #pic = self.request.FILES["file"].read()      
         tenant.picture = db.Blob(pic)
         tenant.put()
         
