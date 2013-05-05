@@ -10,7 +10,7 @@ function($, _, Backbone, tpl) {
         initialize: function() {
 
             this.template = _.template(tpl.get('tenant-details'));
-            this.model.bind("change", this.render, this);
+            this.model.bind("change", this.render, this); //this lined has been commented out for debugging purpose
         },
 
         render: function(eventName) {
