@@ -52,30 +52,30 @@ class RESTfulHandler(webapp.RequestHandler):
         self.response.out.write(tenants)
     
     def post(self ):
-        key = self.request.cookies['tenantlist']
-        tenantList = db.get(key)
-        tenant = Tenants()
-        tenant.tenantlist = tenantList.key()
-        tenant.firstName = self.request.get('firstName')
-        tenant.surname = self.request.get('surname')
-        tenant.gender = self.request.get('gender')
-        tenant.age = int(self.request.get('age'))
-        tenant.phoneNumber = self.request.get('phoneNumber')
-        tenant.email = self.request.get('email')
-        registerDate = datetime.datetime.strptime(self.request.get('registerDate'),"%Y-%m-%d")
-        tenant.registerDate = registerDate.date()
-        #pic = self.request.get("file")
-        pic = self.request.get("picture")
-        tenant.picture = db.Blob(pic)
-        tenant.put()
+#         key = self.request.cookies['tenantlist']
+#         tenantList = db.get(key)
+#         tenant = Tenants()
+#         tenant.tenantlist = tenantList.key()
+#         tenant.firstName = self.request.get('firstName')
+#         tenant.surname = self.request.get('surname')
+#         tenant.gender = self.request.get('gender')
+#         tenant.age = int(self.request.get('age'))
+#         tenant.phoneNumber = self.request.get('phoneNumber')
+#         tenant.email = self.request.get('email')
+#         registerDate = datetime.datetime.strptime(self.request.get('registerDate'),"%Y-%m-%d")
+#         tenant.registerDate = registerDate.date()
+#         #pic = self.request.get("file")
+#         pic = self.request.get("picture")
+#         tenant.picture = db.Blob(pic)
+#         tenant.put()
         
 #previous implementation        
-#         key = self.request.cookies['tenantlist']   
-#         self.response.headers['Content-Type'] = 'application/json'
-#         jsonString = self.request.body          
-#         inputData = simplejson.loads(jsonString) #Decoding JSON 
-#         tenant = simplejson.dumps(Tenants().registerTenant(inputData,key))
-#         self.response.out.write(tenant)
+        key = self.request.cookies['tenantlist']   
+        self.response.headers['Content-Type'] = 'application/json'
+        jsonString = self.request.body          
+        inputData = simplejson.loads(jsonString) #Decoding JSON 
+        tenant = simplejson.dumps(Tenants().registerTenant(inputData,key))
+        self.response.out.write(tenant)
     
     def put(self, tenantId):
         key = self.request.cookies['tenantlist']
