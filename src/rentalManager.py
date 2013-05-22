@@ -142,12 +142,23 @@ class UploadHandler(webapp.RequestHandler):
         #tenant.picture = db.Blob(data['picture'])
         #tenant.picture = db.Blob(image)
         #tenant.put()   
+
+class Image(webapp.RequestHandler):
+    def get(self):
+        img_id = self.request.get("img_id")
+        tenant = db.get(img_id)
+        if tenant.picture:
+            self.response.headers['Content-Type'] = "image/jpg"
+            self.response.out.write(tenant.picture)
+        else:
+            self.response.out.write("no image for this tenant")
     
 application = webapp.WSGIApplication(
                      [('/', MainHandler),
                      ('/uploadPicture',UploadHandler),
                     #('/tenants',TenantHandler),
                       #('/tenants\/?([0-9]*)', RESTfulHandler)],
+                      ('/image',Image),
                       ('/tenants/?', RESTfulHandler)],
                       debug=True)
 
