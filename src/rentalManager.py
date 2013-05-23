@@ -20,8 +20,6 @@ from google.appengine.ext.webapp import template
 from django.utils import simplejson
 import os, Cookie
 
-
-
 class MainHandler(webapp.RequestHandler):
     def get(self):
         if self.request.cookies.get('tenantlist', None) == None:
@@ -148,7 +146,7 @@ class Image(webapp.RequestHandler):
         img_id = self.request.get("img_id")
         tenant = db.get(img_id)
         if tenant.picture:
-            self.response.headers['Content-Type'] = "image/jpeg"
+            self.response.headers['Content-Type'] = "image/jpg"
             self.response.out.write(tenant.picture)
         else:
             self.response.out.write("no image for this tenant")
