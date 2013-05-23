@@ -48,7 +48,7 @@ class RESTfulHandler(webapp.RequestHandler):
             tenants.append(tenant.toDict())
             # tenants.append(tenant.to_dict())
         tenants = simplejson.dumps(tenants)
-        self.response.headers['Content-Type'] = 'image/jpeg'
+        #self.response.headers['Content-Type'] = 'image/jpeg'
         self.response.out.write(tenants)
     
     def post(self ):
@@ -148,7 +148,7 @@ class Image(webapp.RequestHandler):
         img_id = self.request.get("img_id")
         tenant = db.get(img_id)
         if tenant.picture:
-            self.response.headers['Content-Type'] = "image/jpg"
+            self.response.headers['Content-Type'] = "image/jpeg"
             self.response.out.write(tenant.picture)
         else:
             self.response.out.write("no image for this tenant")
