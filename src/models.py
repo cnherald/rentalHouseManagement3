@@ -22,7 +22,7 @@ class Tenants(db.Model):
     
 #    order = db.IntegerProperty()
     picture = db.BlobProperty()
-    picureUrl = db.StringProperty()
+    pictureUrl = db.StringProperty()
     #picture = db.StringProperty()
 #    done = db.BooleanProperty()
     #id = db.IntegerProperty()
@@ -49,7 +49,7 @@ class Tenants(db.Model):
             'registerDate': self.registerDate.isoformat(),
             #'picture': images.Image(self.picture)
             #'picture':  self.picture 
-            'picureUrl':"image?img_id="+str(self.key())
+            'pictureUrl':"image?img_id="+str(self.key())
             }
         return tenant
     
