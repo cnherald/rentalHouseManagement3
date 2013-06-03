@@ -141,7 +141,7 @@ class UploadHandler(webapp.RequestHandler):
         #tenant.picture = db.Blob(image)
         #tenant.put()   
 
-class Image(webapp.RequestHandler):
+class GetImage(webapp.RequestHandler):
     def get(self):
         img_id = self.request.get("img_id")
         tenant = db.get(img_id)
@@ -156,7 +156,7 @@ application = webapp.WSGIApplication(
                      ('/uploadPicture',UploadHandler),
                     #('/tenants',TenantHandler),
                       #('/tenants\/?([0-9]*)', RESTfulHandler)],
-                      ('/image',Image),
+                      ('/image',GetImage),
                       ('/tenants/?', RESTfulHandler)],
                       debug=True)
 
