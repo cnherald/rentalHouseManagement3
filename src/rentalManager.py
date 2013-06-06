@@ -143,8 +143,8 @@ class UploadHandler(webapp.RequestHandler):
 
 class GetImage(webapp.RequestHandler):
     def get(self):
-        img_id = self.request.get("img_id")
-        tenant = db.get(img_id)
+        tenant_id = self.request.get("tenant_id")
+        tenant = db.get(tenant_id)
         if tenant.picture:
             self.response.headers['Content-Type'] = "image/jpg"
             self.response.out.write(tenant.picture)

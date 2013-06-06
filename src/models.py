@@ -49,7 +49,7 @@ class Tenants(db.Model):
             'registerDate': self.registerDate.isoformat(),
             #'picture': images.Image(self.picture)
             #'picture':  self.picture 
-            'pictureUrl':"image?img_id="+str(self.key())
+            'pictureUrl':"image?tenant_id="+str(self.key())
             }
         return tenant
     
