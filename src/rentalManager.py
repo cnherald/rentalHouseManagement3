@@ -147,7 +147,7 @@ class GetImage(webapp.RequestHandler):
         tenant = db.get(tenant_id)
         if tenant.picture:
             self.response.headers['Content-Type'] = "image/jpg"
-            #self.response.out.write(tenant.picture)
+            self.response.out.write(tenant.picture)
             #self.response.out.write(tenant.firstName)
         else:
             self.response.out.write("no image for this tenant")

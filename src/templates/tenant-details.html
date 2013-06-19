@@ -2,6 +2,7 @@
 
 <div class="form-left-col">
     <form  encoding="multipart/form-data" enctype="multipart/form-data">
+    <label><%= id ? 'Tenant Details ' : 'Create New Tenant' %><label>
     <label>Id:</label>
     <input id="tenantId" name="id" type="text" value="<%= id %>" disabled />
 
@@ -33,7 +34,7 @@
     <!--<input type="button"  class="imageClass" value="image"/>-->
 
 
-    <button class="save">Save</button>
+    <button class="save"><%= id ? "Update " : 'Save' %></button>
     <button class="delete">Delete</button>
     </form>
 </div>
