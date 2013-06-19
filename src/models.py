@@ -38,7 +38,8 @@ class Tenants(db.Model):
     
     def toDict(self):
         tenant = {
-            'id': self.key().id(), 
+            #'id': self.key().id(),
+            'id': self.key(),  
             'firstName': self.firstName,
             'surname': self.surname,
             'gender': self.gender,
