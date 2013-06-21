@@ -7,6 +7,26 @@ function($, _, Backbone, tpl) {
 
         tagName: "div",
         // Not required since 'div' is the default if no el or tagName specified
+
+
+        serializeObject: function() {
+              var o = {};
+              var a = this.serializeArray();
+              $.each(a, function() {
+                  if (o[this.name] !== undefined) {
+                      if (!o[this.name].push) {
+                          o[this.name] = [o[this.name]];
+                      }
+                      o[this.name].push(this.value || '');
+                  } else {
+                      o[this.name] = this.value || '';
+                  }
+              });
+              return o;
+        },
+
+
+
         initialize: function() {
 
             this.template = _.template(tpl.get('tenant-details'));
@@ -54,7 +74,16 @@ function($, _, Backbone, tpl) {
 
         },
 
-        saveTenant: function() {
+
+
+        saveTenant: function(ev) {
+            var tenantDetails = $(ev.currentTarget).serializeObject();
+            console.log(tenantDetails);
+            return false;
+
+        },
+
+        saveTenant1: function() {
             this.model.set({				
                 firstName: $('#firstName').val(),
                 surname: $('#surname').val(),
