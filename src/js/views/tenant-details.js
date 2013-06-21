@@ -63,7 +63,7 @@ function($, _, Backbone, tpl) {
                 phoneNumber: $('#phoneNumber').val(),
                 email: $('#email').val(),
 				registerDate: $('#registerDate').val(),
-                description:$('#description').val()
+                description:$('#description').val(),
                 //picture: $('#browse').val()
                 picture: this.pictureFile.name
             });
