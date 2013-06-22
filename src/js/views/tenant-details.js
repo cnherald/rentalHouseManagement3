@@ -79,7 +79,8 @@ function($, _, Backbone, tpl) {
         saveTenant: function(ev) {
             var tenantDetails = $(ev.currentTarget).serializeObject();
             console.log(tenantDetails);
-            //return false;
+            return false;
+
 
         },
 
