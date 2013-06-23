@@ -41,6 +41,7 @@ function($, _, Backbone, tpl) {
         events: {
             "change input": "change",
             "click .save": "saveTenant",
+            //"submit .tenant-details-form": "saveTenant",
             //"click .save": "beforeSave",
             "click .delete": "deleteTenant",
             "change .upload": "displayPicture",
@@ -77,9 +78,10 @@ function($, _, Backbone, tpl) {
 
 
         saveTenant: function(ev) {
-            var tenantDetails = $(ev.target).serializeObject();
+            var tenantDetails = $(ev.currentTarget).serializeObject();
             console.log(tenantDetails);
-            return false;
+            //return false;
+            ev.preventDefault();
 
 
         },
