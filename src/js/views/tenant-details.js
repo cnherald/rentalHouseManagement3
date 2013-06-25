@@ -78,10 +78,11 @@ function($, _, Backbone, tpl) {
 
 
         saveTenant: function(ev) {
-            var tenantDetails = $(ev.currentTarget).serializeObject();
+            //var tenantDetails = $(ev.currentTarget).serializeObject();
+            var tenantDetails = $(ev.currentTarget)
             console.log(tenantDetails);
-            //return false;
-            ev.preventDefault();
+            return false;
+            //ev.preventDefault();
 
 
         },
