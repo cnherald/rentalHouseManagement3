@@ -9,24 +9,6 @@ function($, _, Backbone, tpl) {
         // Not required since 'div' is the default if no el or tagName specified
 
 
-/*        serializeObject: function() {
-              var o = {};
-              var a = this.serializeArray();
-              $.each(a, function() {
-                  if (o[this.name] !== undefined) {
-                      if (!o[this.name].push) {
-                          o[this.name] = [o[this.name]];
-                      }
-                      o[this.name].push(this.value || '');
-                  } else {
-                      o[this.name] = this.value || '';
-                  }
-              });
-              return o;
-        },*/
-
-
-
         initialize: function() {
 
             this.template = _.template(tpl.get('tenant-details'));
@@ -53,9 +35,9 @@ function($, _, Backbone, tpl) {
             //alert("there is something changed!!");
             console.log('changing ' + target.id + ' from: ' + target.defaultValue + ' to: ' + target.value);
             // You could change your model on the spot, like this:
-            // var change = {};
-            // change[target.name] = target.value;
-            // this.model.set(change);
+            var change = {};
+            change[target.name] = target.value;
+            this.model.set(change);
         },
 
 
@@ -86,25 +68,7 @@ function($, _, Backbone, tpl) {
         },
 
         saveTenant: function() {
-            var diff = this.model.changedAttributes();
-            for (var att in diff){
-                switch(att){
-                    case "firstName":
-                        this.model.set({firstName: $('#firstName').val()});
-                    case "surname":
-                        this.model.set({surname: $('#surname').val()});
-                    case "gender":
-                        this.model.set({gender: $('#gender').val()});
-                    case "age":
-                        this.model.set({age: $('#age').val()});
-                    case "phoneNumber":
-                        this.model.set({phoneNumber: $('#phoneNumber').val()}); 
-                    case "email":
-                        this.model.set({email: $('#email').val()});
-                    case "registerDate":
-                        this.model.set({registerDate: $('#registerDate').val()});          
-                }
-            }
+            
 /*            this.model.set({				
                 firstName: $('#firstName').val(),
                 surname: $('#surname').val(),
