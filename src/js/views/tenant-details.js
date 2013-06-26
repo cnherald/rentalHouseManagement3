@@ -94,7 +94,8 @@ function($, _, Backbone, tpl) {
                     }
                 });
             } else {
-                this.model.save(this.model, { wait: true,
+                var self = this;
+                this.model.save(this.model.attributes,{patch: true}, { wait: true,
                     success: function() {
                         alert("you have Changed the tenant!!!  ");                     
                         app.navigate('tenants/' + self.model.id, false);

@@ -156,9 +156,11 @@ application = webapp.WSGIApplication(
                      [('/', MainHandler),
                      ('/uploadPicture',UploadHandler),
                     #('/tenants',TenantHandler),
-                      #('/tenants\/?([0-9]*)', RESTfulHandler)],
-                      ('/image',GetImage),
-                      ('/tenants/?', RESTfulHandler)],
+                     ('/image',GetImage),
+                     #('/tenants\/?([0-9]*)', RESTfulHandler)],
+                      
+                      #('/tenants/?', RESTfulHandler)],
+                      ('/tenants\/?', RESTfulHandler)],
                       debug=True)
 
 def main():
