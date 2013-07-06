@@ -158,7 +158,7 @@ application = webapp.WSGIApplication(
                     #('/tenants',TenantHandler),
                      ('/image',GetImage),
                      #('/tenants\/?([0-9]*)', RESTfulHandler)],
-                      
+                      ('/tenants/update',RESTfulHandler ),
                       #('/tenants/?', RESTfulHandler)],
                       ('/tenants\/?', RESTfulHandler)],
                       debug=True)
