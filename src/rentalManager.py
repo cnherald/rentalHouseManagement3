@@ -75,10 +75,12 @@ class RESTfulHandler(webapp.RequestHandler):
         tenant = simplejson.dumps(Tenants().registerTenant(inputData,key))
         self.response.out.write(tenant)
     
-    def put(self, tenantId):
+    #def put(self, tenantId):
+    def put(self):
         key = self.request.cookies['tenantlist']
         tenantlist = db.get(key)
-        tenant = Tenants.get_by_id(int(tenantId))
+        #tenant = Tenants.get_by_id(int(tenantId))
+        tenant = Tenants.get_by_id(int(7))
         if tenant.tenantlist.key() == tenantlist.key():           
             inputData = simplejson.loads(self.request.body)
 #            tenant.content = inputData['content']
