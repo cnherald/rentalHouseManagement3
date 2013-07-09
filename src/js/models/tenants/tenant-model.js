@@ -8,7 +8,7 @@ function($, _, Backbone) {
         //urlRoot: "tenant",
 		//idAttribute: "_id",
 
-        methodToURL: {
+/*        methodToURL: {
             'read': '/user/get',
             'create': '/user/create',
             'update': '/tenants/update',
@@ -20,6 +20,19 @@ function($, _, Backbone) {
             options.url = model.methodToURL[method.toLowerCase()];
 
             Backbone.sync(method, model, options);
+        },*/
+
+
+
+
+
+        sync: function(method, model, options){
+              if(method=='GET'){
+                options.url = model.url; 
+              }else{
+                 options.url = model.urlRoot + 'update?tenantId='+model.id; 
+              }
+              return Backbone.sync(method, model, options);
         },
 
         defaults: {
