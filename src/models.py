@@ -114,7 +114,7 @@ class Tenants(db.Model):
         self.registerDate = registerDate.date()
         #self.picture = db.Blob(urlfetch.Fetch(data['picture'].content))
         #self.picture = db.Blob(images.resize(data['picture'].encode('utf-8')),32,32)
-        self.picture = db.Blob(images.resize(data['picture'],32,32))
+        #self.picture = db.Blob(images.resize(data['picture'],32,32))
         self.put()
         #return tenant.to_dict()
         return self.toDict()
