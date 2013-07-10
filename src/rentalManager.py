@@ -95,7 +95,7 @@ class RESTfulHandler(webapp.RequestHandler):
             self.error(403)
         #self.response.out.write()
         
-    def delete(self):
+    def delete(self,tenantId):
         key = self.request.cookies['tenantlist']
         tenantlist = db.get(key)
         tenantId = simplejson.loads(self.request.body)['id']
