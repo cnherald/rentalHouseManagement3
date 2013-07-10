@@ -95,9 +95,10 @@ class RESTfulHandler(webapp.RequestHandler):
             self.error(403)
         #self.response.out.write()
         
-    def delete(self, tenantId):
+    def delete(self):
         key = self.request.cookies['tenantlist']
         tenantlist = db.get(key)
+        tenantId = simplejson.loads(self.request.body)['id']
         tenant = Tenants.get_by_id(int(tenantId))
         if tenant.tenantlist.key() == tenantlist.key():
             #tmp = tenant.toDict()
