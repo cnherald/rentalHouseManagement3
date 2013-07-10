@@ -30,7 +30,8 @@ function($, _, Backbone) {
               if(method=='GET'){
                 options.url = model.url; 
               }else{
-                 options.url = model.urlRoot + 'update?tenantId='+model.id; 
+                 //options.url = model.urlRoot + 'update?tenantId='+model.id;
+                 options.url = model.urlRoot + 'update'; 
               }
               return Backbone.sync(method, model, options);
         },
