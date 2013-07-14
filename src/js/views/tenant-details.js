@@ -129,10 +129,11 @@ function($, _, Backbone, tpl) {
             });
         },
 
-        deleteTenant: function() {
+        deleteTenant: function(ev) {
             this.model.destroy({
                 success: function() {
                     alert('Tenant deleted successfully');
+                    //router.navigate('',{trigger: true});
                     window.history.back();
                 }
             });
