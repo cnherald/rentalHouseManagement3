@@ -98,7 +98,8 @@ class RESTfulHandler(webapp.RequestHandler):
     def delete(self):
         key = self.request.cookies['tenantlist']
         tenantlist = db.get(key)
-        tenantId = simplejson.loads(self.request.body)['id']
+        #tenantId = simplejson.loads(self.request.body)['id']
+        tenantId = self.request.get("tenantId")
         tenant = Tenants.get_by_id(int(tenantId))
         if tenant.tenantlist.key() == tenantlist.key():
             #tmp = tenant.toDict()
@@ -163,7 +164,7 @@ application = webapp.WSGIApplication(
                      ('/image',GetImage),
                      #('/tenants\/?([0-9]*)', RESTfulHandler)],
                       ('/tenants/update',RESTfulHandler ),
-                      ('/tenants/delete',RESTfulHandler ),
+                      ('/tenants/delete\/?',RESTfulHandler ),
                       #('/tenants/?', RESTfulHandler)],
                       ('/tenants\/?', RESTfulHandler)],
                       debug=True)
