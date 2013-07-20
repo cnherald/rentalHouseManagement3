@@ -27,10 +27,13 @@ function($, _, Backbone) {
 
 
         sync: function(method, model, options){
-              if(method=='GET'){
+              if(method =='GET'){
                 options.url = model.url; 
-              }else if(method == 'delete'){
-                options.url = model.urlRoot + 'delete?tenantId=' + model.id;
+              }else if(method == 'create'){
+                options.url = model.url; 
+              } else if (method == "delete"){               
+                options.url = model.urlRoot + 'delete?tenantId=' + model.id;       
+
               } else {
                  //options.url = model.urlRoot + 'update?tenantId='+model.id;
                  options.url = model.urlRoot + 'update'; 
