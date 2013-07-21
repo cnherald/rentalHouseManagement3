@@ -28,9 +28,9 @@ function($, _, Backbone) {
 
         sync: function(method, model, options){
               if(method =='GET'){
-                options.url = model.url; 
+                options.url = model.urlRoot; 
               }else if(method == 'create'){
-                options.url = model.url; 
+                options.url = model.urlRoot; 
               } else if (method == "delete"){               
                 options.url = model.urlRoot + 'delete?tenantId=' + model.id;       
 
