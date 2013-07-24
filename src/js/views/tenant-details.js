@@ -132,7 +132,7 @@ function($, _, Backbone, tpl) {
         deleteTenant: function(ev) {
             this.model.destroy({
                 success: function() {
-                    alert('Tenant deleted successfully');
+                    alert('Tenant deleted successfullLLy');
                     //router.navigate('',{trigger: true});
                     window.history.back();
                 }
