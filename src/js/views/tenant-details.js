@@ -89,7 +89,7 @@ function($, _, Backbone, tpl) {
                     //app.tenantList.create(this.model.toJSON(), { wait: true, 
                    // this.model.save(null, { wait: true,     
                     success: function() {
-						alert("you have registered a new tenant!!!  ");						
+						alert("you have registered a new tenantTT!!!  ");						
                         app.navigate('tenants/' + self.model.id, false);
 						
                     }
