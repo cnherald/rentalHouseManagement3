@@ -16,8 +16,7 @@ function($, _, Backbone, tpl) {
 
         events: {
             "click .tenants": "tenantListings",
-            "click .rooms": "roomListings"
-            //"click .new": "newTenant"
+            "click .new": "newTenant"
         },
         tenantListings:function(event) {
             app.navigate("tenants/listings", true);

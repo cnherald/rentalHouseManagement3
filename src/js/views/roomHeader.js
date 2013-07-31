@@ -15,16 +15,11 @@ function($, _, Backbone, tpl) {
         },
 
         events: {
-            "click .tenants": "tenantListings",
-            "click .rooms": "roomListings"
-            //"click .new": "newTenant"
+            "click .new": "newRoom"
         },
-        tenantListings:function(event) {
-            app.navigate("tenants/listings", true);
-            return false;
-        },
-        newTenant: function(event) {
-            app.navigate("tenants/new", true);
+
+        newRoom: function(event) {
+            app.navigate("room/new", true);
             return false;
         }
 

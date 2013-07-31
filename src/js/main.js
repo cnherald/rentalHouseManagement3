@@ -30,15 +30,40 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, tpl,
 
         routes: {
             "": "list",
-            "tenants/new": "newTenant",
+            "tenants/listings": "tenantListings",
+            "tenants/listings": "roomsListings",
+            "tenant/new": "newTenant",
+            "room/new": "newRoom",
             "tenants/:id": "tenantDetails"
         },
 
         list: function() {
+             this.showView('#content', new StartView());
+            // this.before(function() {
+            //     this.showView('#content', new StartView());
+            // });
+        },
+
+        tenantListings: function() {
+            alert("tenant listings !!! " );
             this.before(function() {
-                this.showView('#content', new StartView());
+                var tenant = this.tenantList.get(id);
+                this.showView('#content', new TenantView({
+                    model: tenant
+                }));
             });
         },
+
+        roomsListings: function() {
+            alert("room listings !!! " );
+            this.before(function() {
+                var tenant = this.tenantList.get(id);
+                this.showView('#content', new TenantView({
+                    model: tenant
+                }));
+            });
+        },
+
 
         tenantDetails: function(id) {
             alert("test------id= " + id);
