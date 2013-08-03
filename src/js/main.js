@@ -5,13 +5,17 @@ require([
     'views/header',
     'views/start',
     'views/tenant-details',
+    'views/room-details',
     'views/tenant-list',
+    'views/room-list',
     'utils/tpl',
     'models/tenants/tenant-model',
-    'models/tenants/tenant-collection'
+    'models/rooms/room-model',
+    'models/tenants/tenant-collection',
+    'models/rooms/room-collection'
 ],
 
-function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, tpl, Tenant, TenantCollection) {
+function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, RoomView, RoomListView, tpl, Tenant, TenantCollection,Room, RoomCollection) {
 
     Backbone.View.prototype.close = function() {
         console.log('Closing view ' + this);
@@ -31,10 +35,11 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, tpl,
         routes: {
             "": "list",
             "tenants/listings": "tenantListings",
-            "tenants/listings": "roomsListings",
+            "rooms/listings": "roomsListings",
             "tenant/new": "newTenant",
             "room/new": "newRoom",
-            "tenants/:id": "tenantDetails"
+            "tenants/:id": "tenantDetails",
+            "rooms/:id": "roomDetails"
         },
 
         list: function() {
@@ -46,7 +51,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, tpl,
 
         tenantListings: function() {
             alert("tenant listings !!! " );
-            this.before(function() {
+            this.tenantBefore(function() {
                 var tenant = this.tenantList.get(id);
                 this.showView('#content', new TenantView({
                     model: tenant
@@ -67,10 +72,20 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, tpl,
 
         tenantDetails: function(id) {
             alert("test------id= " + id);
-            this.before(function() {
+            this.tenantBefore(function() {
                 var tenant = this.tenantList.get(id);
                 this.showView('#content', new TenantView({
                     model: tenant
+                }));
+            });
+        },
+
+        roomDetails: function(id) {
+            alert("test------id= " + id);
+            this.roomBefore(function() {
+                var room = this.roomList.get(id);
+                this.showView('#content', new RoomView({
+                    model: room
                 }));
             });
         },
@@ -79,6 +94,14 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, tpl,
             this.before(function() {
                 this.showView('#content', new TenantView({
                     model: new Tenant()
+                }));
+            });
+        },
+
+        newRoom: function() {
+            this.before(function() {
+                this.showView('#content', new RoomView({
+                    model: new Room()
                 }));
             });
         },
@@ -92,7 +115,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, tpl,
             return view;
         },
 
-        before: function(callback) {
+        tenantBefore: function(callback) {
             if (this.tenantList) {
                 if (callback) callback.call(this);
             } else {
@@ -108,11 +131,29 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, tpl,
                     }
                 });
             }
+        },
+
+        roomBefore: function(callback) {
+            if (this.roomList) {
+                if (callback) callback.call(this);
+            } else {
+                this.roomList = new RoomCollection();
+                var self = this;
+                this.roomList.fetch({
+                    success: function() {
+                        var roomlist = new RoomListView({
+                            model: self.roomList
+                        }).render();
+                        $('#sidebar').html(roomlist);
+                        if (callback) callback.call(self);
+                    }
+                });
+            }
         }
 
     });
 
-    tpl.loadTemplates(['header', 'tenant-details', 'tenant-list-item', 'start'], function() {
+    tpl.loadTemplates(['header', 'tenant-details', 'tenant-list-item', 'room-details', 'room-list-item','start'], function() {
         window.app = new AppRouter();
         Backbone.history.start();
     });

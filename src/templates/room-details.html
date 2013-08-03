@@ -1,0 +1,42 @@
+
+
+<div class="form-left-col">
+    <form  class="room-details-form" encoding="multipart/form-data" enctype="multipart/form-data">
+    <label><%= id ? 'Room Details ' : 'Create New Room' %><label>
+    <label>Id:</label>
+    <input id="roomId" name="id" type="text" value="<%= id %>" disabled />
+
+    <label>Number:</label>
+    <input type="text" id="number" name="number" value="<%= number %>" required/>
+
+    <label>Area:</label>
+    <input type="text" id="area" name="area"  value="<%= age %>"/>
+
+    <label>Windows:</label>
+    <input type="text" id="windows" name="windows"  value="<%= windows %>"/>
+	
+	<label>Validation Date:</label>
+    <input type="text" id="validationDate" name="validationDate"  value="<%= validationDate %>"/>
+
+    <input type="file" id="browse" name="browse" size="50"  placeholder="Photo" checked="checked" class="upload" value="<%= picture %>"/>
+    <img id="img_prev" src="#" alt="Here is the preview image" /><br>
+    <!--<img id="img_room" src="<%= pictureUrl %>" width="100" height="80" alt="here is the room image" /><br>-->
+    <!--<input type="button"  class="imageClass" value="image"/>-->
+
+
+    <button class="save"><%= id ? "Update " : 'Save' %></button>
+    <button class="delete"> Delete</button>
+    </form>
+</div>
+
+<div class="form-right-col" >
+
+    
+    <!--<div><input type="file" id="img" name="img" size="50" /></div>
+    <div><input type="submit" value="Upload Image" /></div>-->
+    
+    <!--<input type="file" id="img" name="image" height="300" src="img/<%= picture %>"/>-->
+    <!--<img height="300" src="<%= pictureUrl %>" alt="Put the room image with the note" /><br>-->
+    <label>Notes:</label>
+    <textarea id="description" name="description"><%= description %></textarea>
+</div>

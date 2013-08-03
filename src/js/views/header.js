@@ -23,10 +23,15 @@ function($, _, Backbone, tpl) {
             app.navigate("tenants/listings", true);
             return false;
         },
-        newTenant: function(event) {
-            app.navigate("tenants/new", true);
+
+        roomListings:function(event) {
+            app.navigate("rooms/listings", true);
             return false;
         }
+        // newTenant: function(event) {
+        //     app.navigate("tenants/new", true);
+        //     return false;
+        // }
 
     });
 

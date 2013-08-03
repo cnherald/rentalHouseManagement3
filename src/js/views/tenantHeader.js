@@ -23,7 +23,7 @@ function($, _, Backbone, tpl) {
             return false;
         },
         newTenant: function(event) {
-            app.navigate("tenants/new", true);
+            app.navigate("tenant/new", true);
             return false;
         }
 

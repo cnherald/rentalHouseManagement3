@@ -3,43 +3,43 @@ define(
 
 function($, _, Backbone, tpl) {
 
-    var TenantListView = Backbone.View.extend({
+    var RoomListView = Backbone.View.extend({
 
         tagName: 'ul',
 
         initialize: function() {
             this.model.bind("reset", this.render, this);
-            this.model.bind("add", this.appendNewTenant, this);
+            this.model.bind("add", this.appendNewRoom, this);
         },
 
         render: function(eventName) {
-            _.each(this.model.models, function(tenant) {
-                this.appendNewTenant(tenant);
+            _.each(this.model.models, function(room) {
+                this.appendNewRoom(room);
             }, this);
             return this.el;
         },
 
-        appendNewroom: function(tenant) {
-            this.$el.append(new TenantListItemView({
-                model: tenant
+        appendNewroom: function(room) {
+            this.$el.append(new RoomListItemView({
+                model: room
             }).render());
         }
     });
 
-    var TenantListItemView = Backbone.View.extend({
+    var RoomListItemView = Backbone.View.extend({
 
         tagName: "li",
 		events:{
-			"click #tenantFirstName": "alertMsg"
+			"click #roomFirstName": "alertMsg"
 		},
         initialize: function() {
-            this.template = _.template(tpl.get('tenant-list-item'));
+            this.template = _.template(tpl.get('room-list-item'));
             this.model.bind("change", this.render, this);
             this.model.bind("destroy", this.close, this);
         },
 		alertMsg: function(){
 			//alert("test!!!!");
-			//app.navigate('tenants/' + this.model.id, true); 
+			//app.navigate('rooms/' + this.model.id, true); 
 			//return false;
 		},
         render: function(eventName) {
@@ -49,6 +49,6 @@ function($, _, Backbone, tpl) {
 
     });
 
-    return TenantListView;
+    return RoomListView;
 
 });
