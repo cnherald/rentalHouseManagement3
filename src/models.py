@@ -16,6 +16,9 @@ import time
 
 class TenantList(db.Model):
     timestamp = db.DateTimeProperty(auto_now_add=True)
+    
+class RoomList(db.Model):
+    timestamp = db.DateTimeProperty(auto_now_add=True)
 
 class Tenants(db.Model):
     tenantlist = db.ReferenceProperty(TenantList)
@@ -118,3 +121,66 @@ class Tenants(db.Model):
         self.put()
         #return tenant.to_dict()
         return self.toDict()
+    
+class Rooms(db.Model):
+    roomlist = db.ReferenceProperty(RoomList)
+    picture = db.BlobProperty()
+    pictureUrl = db.StringProperty()
+    number = db.IntegerProperty()
+    area = db.IntegerProperty()
+    windows = db.IntegerProperty()
+    validationDate = db.DateProperty(auto_now_add = True)  
+    
+    def toDict(self):
+        room = {
+            'id': self.key().id(),  
+            'number': self.number,
+            'area': self.area,
+            'windows': self.windows,
+            'age': self.age,
+            'validationDate': self.validationDate.isoformat(),
+            'pictureUrl':"image?room_id="+str(self.key())
+            }
+        return room
+    
+    def to_dict(self):
+        # Define 'simple' types using a tuple
+        SIMPLE_TYPES = (int, long, float, bool, dict, basestring, list)
+        room = {}
+    
+        for key, prop in self.properties().iteritems():
+            value = getattr(self, key)
+    
+            if value is None or isinstance(value, SIMPLE_TYPES):
+                room[key] = value
+            elif isinstance(value, datetime.date):
+            #elif isinstance(value, datetime):
+                dateString = value.strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+                #dateString = value
+                room[key] = dateString
+            elif isinstance(value, db.GeoPt):
+                room[key] = {'lat': value.lat, 'lon': value.lon}
+
+        return room
+    
+    def registerRoom(self,data,key):
+        roomList = db.get(key)
+        room = Rooms()             
+        room.roomlist = roomList.key()
+        room.number = data['number']
+        room.area = data['area']
+        room.windows = data['windows']
+        validationDate = datetime.datetime.strptime(data['validationDate'],"%Y-%m-%d")
+        room.validationDate = validationDate.date()    
+        room.put()
+        return room.toDict()
+
+    def updateRoom(self,data):
+        self.number = data['number']
+        self.area = data['area']
+        self.windows = data['windows']
+        validationDate = datetime.datetime.strptime(data['validationDate'],"%Y-%m-%d")
+        self.validationDate = validationDate.date()
+        self.put()
+        return self.toDict()
+

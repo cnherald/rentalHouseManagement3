@@ -49,8 +49,8 @@ function($, _, Backbone) {
             "age": " ",
             "phoneNumber": "",
             "email": "",
-			"registerDate": "",
-			"picture": ""
+			       "registerDate": "",
+			       "picture": ""
 			
         }
     });

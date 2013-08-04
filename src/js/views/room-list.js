@@ -30,7 +30,7 @@ function($, _, Backbone, tpl) {
 
         tagName: "li",
 		events:{
-			"click #roomFirstName": "alertMsg"
+			"click #roomNumber": "alertMsg"
 		},
         initialize: function() {
             this.template = _.template(tpl.get('room-list-item'));

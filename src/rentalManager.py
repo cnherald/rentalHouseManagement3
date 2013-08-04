@@ -13,7 +13,9 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from models import Tenants
+from models import Rooms
 from models import TenantList
+from models import RoomList
 from google.appengine.ext import db
 from datetime import datetime
 from google.appengine.ext.webapp import template
@@ -107,7 +109,81 @@ class RESTfulHandler(webapp.RequestHandler):
         else:
             self.error(403)
         #self.response.out.write()
+
+class RoomRESTfulHandler(webapp.RequestHandler):
+    #def get(self, tenantId):
+    def get(self):
+        key = self.request.cookies['roomlist']
+        roomlist = db.get(key)
+        rooms = []
+        query = Rooms.all()
+        #query = db.GqlQuery("SELECT * FROM Rooms")
+        query.filter("roomlist =", roomlist.key())
+        for room in query:
+            rooms.append(room.toDict())
+            # rooms.append(room.to_dict())
+        rooms = simplejson.dumps(rooms)
+        #self.response.headers['Content-Type'] = 'image/jpeg'
+        self.response.out.write(rooms)
+    
+    def post(self ):
+#         key = self.request.cookies['roomlist']
+#         roomList = db.get(key)
+#         room = Rooms()
+#         room.roomlist = roomList.key()
+#         room.firstName = self.request.get('firstName')
+#         room.surname = self.request.get('surname')
+#         room.gender = self.request.get('gender')
+#         room.age = int(self.request.get('age'))
+#         room.phoneNumber = self.request.get('phoneNumber')
+#         room.email = self.request.get('email')
+#         registerDate = datetime.datetime.strptime(self.request.get('registerDate'),"%Y-%m-%d")
+#         room.registerDate = registerDate.date()
+#         #pic = self.request.get("file")
+#         pic = self.request.get("picture")
+#         room.picture = db.Blob(pic)
+#         room.put()
         
+#previous implementation        
+        key = self.request.cookies['roomlist']   
+        self.response.headers['Content-Type'] = 'application/json'
+        jsonString = self.request.body          
+        inputData = simplejson.loads(jsonString) #Decoding JSON 
+        room = simplejson.dumps(Rooms().registerRoom(inputData,key))
+        self.response.out.write(room)
+    
+    #def put(self, roomId):
+    def put(self):
+        key = self.request.cookies['roomlist']
+        roomlist = db.get(key)
+        roomId = simplejson.loads(self.request.body)['id']
+        room = Rooms.get_by_id(int(roomId))
+        #room = Rooms.get_by_id(int(2))
+        if room.roomlist.key() == roomlist.key():           
+            inputData = simplejson.loads(self.request.body)
+#            room.content = inputData['content']
+#            room.done    = inputData['done']
+#            room.put()            
+#            room = simplejson.dumps(room.toDict())
+            temp = room.updateRoom(inputData)
+            room = simplejson.dumps(temp)
+            self.response.out.write(room)
+        else:
+            self.error(403)
+        #self.response.out.write()
+        
+    def delete(self):
+        key = self.request.cookies['roomlist']
+        roomlist = db.get(key)
+        #roomId = simplejson.loads(self.request.body)['id']
+        roomId = self.request.get("roomId")
+        room = Rooms.get_by_id(int(roomId))
+        if room.roomlist.key() == roomlist.key():
+            #tmp = room.toDict()
+            room.delete()
+        else:
+            self.error(403)
+        #self.response.out.write()        
 class TenantHandler(webapp.RequestHandler):
     roomNotAvailable = False
     def get(self):
@@ -164,9 +240,12 @@ application = webapp.WSGIApplication(
                      ('/image',GetImage),
                      #('/tenants\/?([0-9]*)', RESTfulHandler)],
                       ('/tenants/update',RESTfulHandler ),
+                      ('/rooms/update',RoomRESTfulHandler ),
                       ('/tenants/delete\/?',RESTfulHandler ),
+                      ('/rooms/delete\/?',RoomRESTfulHandler ),
                       #('/tenants/?', RESTfulHandler)],
-                      ('/tenants\/?', RESTfulHandler)],
+                      ('/tenants\/?', RESTfulHandler),
+                      ('/rooms\/?', RoomRESTfulHandler)],
                       debug=True)
 
 def main():
