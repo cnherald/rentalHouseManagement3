@@ -32,6 +32,14 @@ class MainHandler(webapp.RequestHandler):
             cookie['tenantlist']['expires'] = datetime(2014, 1, 1).strftime('%a, %d %b %Y %H:%M:%S')
             cookie['tenantlist']['path'] = '/'
             self.response.headers.add_header('Set-Cookie', cookie['tenantlist'].OutputString())
+        if self.request.cookies.get('roomlist', None) == None:
+            tenantList = TenantList()
+            tenantList.put()
+            cookie = Cookie.SimpleCookie()
+            cookie['roomlist'] = tenantList.key().__str__()
+            cookie['roomlist']['expires'] = datetime(2014, 1, 1).strftime('%a, %d %b %Y %H:%M:%S')
+            cookie['roomlist']['path'] = '/'
+            self.response.headers.add_header('Set-Cookie', cookie['roomlist'].OutputString())
         path = os.path.join(os.path.dirname(__file__), 'index.html')
         self.response.out.write(template.render(path, None))
 

@@ -62,9 +62,9 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, Room
         roomsListings: function() {
             alert("room listings !!! " );
             this.before(function() {
-                var tenant = this.tenantList.get(id);
-                this.showView('#content', new TenantView({
-                    model: tenant
+                var room = this.roomList.get(id);
+                this.showView('#content', new roomView({
+                    model: room
                 }));
             });
         },
