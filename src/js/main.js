@@ -61,7 +61,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, Room
 
         roomsListings: function() {
             alert("room listings !!! " );
-            this.before(function() {
+            this.roomBefore(function() {
                 var room = this.roomList.get(id);
                 this.showView('#content', new roomView({
                     model: room
