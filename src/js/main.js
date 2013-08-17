@@ -10,8 +10,8 @@ require([
     'views/room-list',
     'utils/tpl',
     'models/tenants/tenant-model',
-    'models/rooms/room-model',
     'models/tenants/tenant-collection',
+    'models/rooms/room-model',
     'models/rooms/room-collection'
 ],
 
