@@ -19,7 +19,7 @@ function($, _, Backbone, tpl) {
             return this.el;
         },
 
-        appendNewroom: function(tenant) {
+        appendNewTenant: function(tenant) {
             this.$el.append(new TenantListItemView({
                 model: tenant
             }).render());

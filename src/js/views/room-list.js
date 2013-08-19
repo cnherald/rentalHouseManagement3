@@ -19,7 +19,7 @@ function($, _, Backbone, tpl) {
             return this.el;
         },
 
-        appendNewroom: function(room) {
+        appendNewRoom: function(room) {
             this.$el.append(new RoomListItemView({
                 model: room
             }).render());
