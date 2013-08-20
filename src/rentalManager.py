@@ -51,7 +51,8 @@ class RESTfulHandler(webapp.RequestHandler):
         tenants = []
         query = Tenants.all()
         #query = db.GqlQuery("SELECT * FROM Tenants")
-        query.filter("tenantlist =", tenantlist.key())
+        if tenantlist:
+            query.filter("tenantlist =", tenantlist.key())
         for tenant in query:
             tenants.append(tenant.toDict())
             # tenants.append(tenant.to_dict())
