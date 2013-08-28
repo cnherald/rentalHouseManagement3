@@ -78,7 +78,8 @@ class RESTfulHandler(webapp.RequestHandler):
 #         tenant.picture = db.Blob(pic)
 #         tenant.put()
         
-#previous implementation        
+#previous implementation
+# ##        
         key = self.request.cookies['tenantlist']   
         self.response.headers['Content-Type'] = 'application/json'
         jsonString = self.request.body          
