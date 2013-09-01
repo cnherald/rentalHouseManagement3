@@ -123,6 +123,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, Room
                 var self = this;
                 this.tenantList.fetch({
                     success: function() {
+                        alert("tenant listings fetched " );
                         var tenantlist = new TenantListView({
                             model: self.tenantList
                         }).render();
