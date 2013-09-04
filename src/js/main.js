@@ -121,7 +121,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, Room
             } else {
                 this.tenantList = new TenantCollection();
                 var self = this;
-                this.tenantList.fetch({
+                this.tenantList.fetch({wait: true,
                     success: function() {
                         alert("tenant listings fetched " );
                         var tenantlist = new TenantListView({
