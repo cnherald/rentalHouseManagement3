@@ -4,10 +4,12 @@ require([
     'backbone',
     'views/header',
     'views/start',
-    'views/tenant-details',
-    'views/room-details',
-    'views/tenant-list',
-    'views/room-list',
+    'views/tenants/tenant-details',
+    'views/rooms/room-details',
+    'views/tenants/tenant-list',
+    'views/rooms/room-list',
+    'views/tenants/tenantHeader',
+    'views/rooms/roomHeader',
     'utils/tpl',
     'models/tenants/tenant-model',
     'models/tenants/tenant-collection',
@@ -15,7 +17,7 @@ require([
     'models/rooms/room-collection'
 ],
 
-function($, _, Backbone, HeaderView, StartView, TenantView, TenantListView, RoomView, RoomListView, tpl, Tenant, TenantCollection,Room, RoomCollection) {
+function($, _, Backbone, HeaderView, StartView, TenantView, RoomView, TenantListView, RoomListView, tenantHeaderView,roomHeaderView, tpl, Tenant, TenantCollection,Room, RoomCollection) {
 
     Backbone.View.prototype.close = function() {
         console.log('Closing view ' + this);

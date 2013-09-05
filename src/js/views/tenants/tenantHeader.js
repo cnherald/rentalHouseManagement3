@@ -3,10 +3,10 @@ define(
 
 function($, _, Backbone, tpl) {
 
-    var HeaderView = Backbone.View.extend({
+    var tenantHeaderView = Backbone.View.extend({
 
         initialize: function() {
-            this.template = _.template(tpl.get('header'));
+            this.template = _.template(tpl.get('tenantHeader'));
         },
 
         render: function(eventName) {
@@ -15,13 +15,13 @@ function($, _, Backbone, tpl) {
         },
 
         events: {
-            "click .tenants": "tenantListings",
+            //"click .tenants": "tenantListings",
             "click .new": "newTenant"
         },
-        tenantListings:function(event) {
-            app.navigate("tenants/listings", true);
-            return false;
-        },
+        // tenantListings:function(event) {
+        //     app.navigate("tenants/listings", true);
+        //     return false;
+        // },
         newTenant: function(event) {
             app.navigate("tenant/new", true);
             return false;
@@ -29,6 +29,6 @@ function($, _, Backbone, tpl) {
 
     });
 
-    return HeaderView;
+    return tenantHeaderView;
 
 });

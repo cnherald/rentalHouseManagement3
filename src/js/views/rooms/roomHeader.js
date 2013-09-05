@@ -3,10 +3,10 @@ define(
 
 function($, _, Backbone, tpl) {
 
-    var HeaderView = Backbone.View.extend({
+    var roomHeaderView = Backbone.View.extend({
 
         initialize: function() {
-            this.template = _.template(tpl.get('header'));
+            this.template = _.template(tpl.get('roomHeader'));
         },
 
         render: function(eventName) {
@@ -25,6 +25,6 @@ function($, _, Backbone, tpl) {
 
     });
 
-    return HeaderView;
+    return roomHeaderView;
 
 });
