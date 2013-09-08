@@ -123,7 +123,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, RoomView, TenantList
             } else {
                 this.tenantList = new TenantCollection();
                 var self = this;
-                this.tenantList.fetch({wait: true,
+                this.tenantList.fetch({
                     success: function() {
                         alert("tenant listings fetched " );
                         var tenantlist = new TenantListView({
