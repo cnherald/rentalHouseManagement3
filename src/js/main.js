@@ -53,6 +53,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, RoomView, TenantList
 
         tenantListings: function() {
             alert("tenant listings !!! " );
+            //$('#tenantHeader').html(new tenantHeaderView().render());
             this.tenantBefore(function() {
                 var tenant = this.tenantList.get(id);
                 this.showView('#content', new TenantView({
