@@ -6,6 +6,7 @@ function($, _, Backbone, tpl) {
     var tenantHeaderView = Backbone.View.extend({
 
         initialize: function() {
+            alert("tenantHeaderView is here!!");
             this.template = _.template(tpl.get('tenantHeader'));
         },
 

@@ -32,7 +32,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, RoomView, TenantList
 
         initialize: function() {
             $('#header').html(new HeaderView().render());
-            //$('#tenantHeader').html(new tenantHeaderView().render());
+            $('#tenantHeader').html(new tenantHeaderView().render());
         },
 
         routes: {
