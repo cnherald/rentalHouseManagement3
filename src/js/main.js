@@ -32,7 +32,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, RoomView, TenantList
 
         initialize: function() {
             $('#header').html(new HeaderView().render());
-            $('#tenantHeader').html(new tenantHeaderView().render());
+            //$('#tenantHeader').html(new tenantHeaderView().render());
         },
 
         routes: {
@@ -54,7 +54,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, RoomView, TenantList
 
         tenantListings: function() {
             alert("tenant listings !!! " );
-            //$('#tenantHeader').html(new tenantHeaderView().render());
+            $('#tenantHeader').html(new tenantHeaderView().render());
             this.tenantBefore(function() {
                 var tenant = this.tenantList.get(id);
                 this.showView('#content', new TenantView({
@@ -158,7 +158,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, RoomView, TenantList
 
     });
 
-    tpl.loadTemplates(['header', 'tenant-details', 'tenant-list-item', 'room-details', 'room-list-item','start'], function() {
+    tpl.loadTemplates(['header','tenantHeader','roomHeader', 'tenant-details', 'tenant-list-item', 'room-details', 'room-list-item','start'], function() {
         window.app = new AppRouter();
         Backbone.history.start();
     });
