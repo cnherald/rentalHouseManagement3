@@ -1,8 +1,8 @@
 application: rentalhousemanagement3id
 version: 2
-runtime: python27
+runtime: python
 api_version: 1
-threadsafe: yes
+
 
 builtins:
 - datastore_admin: on
