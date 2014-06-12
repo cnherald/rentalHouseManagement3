@@ -10,9 +10,9 @@
 #from datetime import datetime
 #from google.appengine.dist import use_library
 #use_library('django','1.2')
-
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
+import webapp2
+#from google.appengine.ext import webapp
+#from google.appengine.ext.webapp.util import run_wsgi_app
 from models import Tenants
 from models import Rooms
 from models import TenantList
@@ -23,7 +23,7 @@ from google.appengine.ext.webapp import template
 from django.utils import simplejson
 import os, Cookie
 
-class MainHandler(webapp.RequestHandler):
+class MainHandler(webapp2.RequestHandler):
     def get(self):
         if self.request.cookies.get('tenantlist', None) == None:
             tenantList = TenantList()
@@ -44,7 +44,7 @@ class MainHandler(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'index.html')
         self.response.out.write(template.render(path, None))
 
-class RESTfulHandler(webapp.RequestHandler):
+class RESTfulHandler(webapp2.RequestHandler):
     #def get(self, tenantId):
     def get(self):
         key = self.request.cookies['tenantlist']
@@ -121,7 +121,7 @@ class RESTfulHandler(webapp.RequestHandler):
             self.error(403)
         #self.response.out.write()
 
-class RoomRESTfulHandler(webapp.RequestHandler):
+class RoomRESTfulHandler(webapp2.RequestHandler):
     #def get(self, tenantId):
     def get(self):
         key = self.request.cookies['roomlist']
@@ -195,7 +195,7 @@ class RoomRESTfulHandler(webapp.RequestHandler):
         else:
             self.error(403)
         #self.response.out.write()        
-class TenantHandler(webapp.RequestHandler):
+class TenantHandler(webapp2.RequestHandler):
     roomNotAvailable = False
     def get(self):
         tenants = Tenants().getCurrentTenants()
@@ -214,7 +214,7 @@ class TenantHandler(webapp.RequestHandler):
 #    def post(self):
 #        avatar = self.request.get('img')    
 
-class UploadHandler(webapp.RequestHandler):     
+class UploadHandler(webapp2.RequestHandler):     
     def post(self):
         key = self.request.cookies['tenantlist']
         tenantList = db.get(key)
@@ -233,7 +233,7 @@ class UploadHandler(webapp.RequestHandler):
         #tenant.picture = db.Blob(image)
         #tenant.put()   
 
-class GetImage(webapp.RequestHandler):
+class GetImage(webapp2.RequestHandler):
     def get(self):
         tenant_id = self.request.get("tenant_id")
         tenant = db.get(tenant_id)
@@ -244,7 +244,8 @@ class GetImage(webapp.RequestHandler):
         else:
             self.response.out.write("no image for this tenant")
     
-application = webapp.WSGIApplication(
+#application = webapp.WSGIApplication(
+app = webapp2.WSGIApplication(
                      [('/', MainHandler),
                      ('/uploadPicture',UploadHandler),
                     #('/tenants',TenantHandler),
@@ -259,10 +260,10 @@ application = webapp.WSGIApplication(
                       ('/rooms\/?', RoomRESTfulHandler)],
                       debug=True)
 
-def main():
-    run_wsgi_app(application)
+#def main():
+#    run_wsgi_app(application)
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+# main()
 
 
