@@ -159,6 +159,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, RoomView, TenantList
     });
 
     tpl.loadTemplates(['header','tenantHeader','roomHeader', 'tenant-details', 'tenant-list-item', 'room-details', 'room-list-item','start'], function() {
+    //tpl.loadTemplates([ 'start'], function() {    
         window.app = new AppRouter();
         Backbone.history.start();
     });
