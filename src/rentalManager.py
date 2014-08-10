@@ -30,12 +30,14 @@ class MainHandler(webapp2.RequestHandler):
             tenantList.put()
             cookie = Cookie.SimpleCookie()
             cookie['tenantlist'] = tenantList.key().__str__()
-            cookie['tenantlist']['expires'] = datetime(2014, 1, 1).strftime('%a, %d %b %Y %H:%M:%S')
+            cookie['tenantlist']['expires'] = datetime(2016, 1, 1).strftime('%a, %d %b %Y %H:%M:%S')
             cookie['tenantlist']['path'] = '/'
             self.response.headers.add_header('Set-Cookie', cookie['tenantlist'].OutputString())
         if self.request.cookies.get('roomlist', None) == None:
-            tenantList = TenantList()
-            tenantList.put()
+#          tenantList = TenantList()
+#          tenantList.put()
+            roomList = RoomList()
+            roomList.put()
             cookie = Cookie.SimpleCookie()
             cookie['roomlist'] = tenantList.key().__str__()
             cookie['roomlist']['expires'] = datetime(2014, 1, 1).strftime('%a, %d %b %Y %H:%M:%S')
