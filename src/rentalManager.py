@@ -39,8 +39,8 @@ class MainHandler(webapp2.RequestHandler):
             roomList = RoomList()
             roomList.put()
             cookie = Cookie.SimpleCookie()
-            cookie['roomlist'] = tenantList.key().__str__()
-            cookie['roomlist']['expires'] = datetime(2014, 1, 1).strftime('%a, %d %b %Y %H:%M:%S')
+            cookie['roomlist'] = roomList.key().__str__()
+            cookie['roomlist']['expires'] = datetime(2016, 1, 1).strftime('%a, %d %b %Y %H:%M:%S')
             cookie['roomlist']['path'] = '/'
             self.response.headers.add_header('Set-Cookie', cookie['roomlist'].OutputString())
         path = os.path.join(os.path.dirname(__file__), 'index.html')
