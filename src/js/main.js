@@ -65,6 +65,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, RoomView, TenantList
 
         roomsListings: function() {
             alert("room listings !!! " );
+            $('#roomHeader').html(new roomHeaderView().render());
             this.roomBefore(function() {
                 var room = this.roomList.get(id);
                 this.showView('#content', new roomView({
@@ -146,6 +147,7 @@ function($, _, Backbone, HeaderView, StartView, TenantView, RoomView, TenantList
                 var self = this;
                 this.roomList.fetch({
                     success: function() {
+                        alert("room listings fetched " );
                         var roomlist = new RoomListView({
                             model: self.roomList
                         }).render();
